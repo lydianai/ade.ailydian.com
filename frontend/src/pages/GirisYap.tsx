@@ -10,9 +10,18 @@ export default function GirisYap() {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({ email: '', password: '' })
 
-  const handleDemoLogin = () => {
-    demoGiris()
-    navigate('/panel')
+  const handleDemoLogin = async () => {
+    // Demo kullanıcı bilgilerini otomatik doldur
+    setFormData({
+      email: 'demo@ade.gov.tr',
+      password: 'demo123'
+    })
+
+    // Kısa bir gecikme sonrası otomatik giriş yap
+    setTimeout(() => {
+      demoGiris()
+      navigate('/panel')
+    }, 500)
   }
 
   const handleSubmit = async (e: React.FormEvent) => {

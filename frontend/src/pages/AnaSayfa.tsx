@@ -223,6 +223,31 @@ export default function AnaSayfa() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" style={{ animationDelay: '2s' }} />
 
         <div className="container-custom relative z-10">
+          {/* DEVELOPMENT BANNER - EN ÜST SIRADA */}
+          <motion.div
+            initial={{ opacity: 0, y: -30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center mb-12"
+          >
+            <div className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-orange-600 border-4 border-orange-400 shadow-2xl">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                className="w-8 h-8 border-4 border-white border-t-transparent rounded-full"
+              />
+              <span className="text-white font-black text-2xl md:text-4xl tracking-widest uppercase">
+                {devText || 'GELİŞTİRME AŞAMASINDA'}
+                <motion.span
+                  animate={{ opacity: [1, 0] }}
+                  transition={{ duration: 0.8, repeat: Infinity }}
+                >
+                  |
+                </motion.span>
+              </span>
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -238,69 +263,6 @@ export default function AnaSayfa() {
             >
               <SparklesIcon className="w-5 h-5 text-amber-400" />
               <span className="text-white/90 font-medium">Türkiye'nin İlk Yapay Zeka Devlet Asistanı</span>
-            </motion.div>
-
-            {/* Development Status Banner - ULTRA VISIBLE */}
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: -20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.35,
-                type: 'spring',
-                stiffness: 200,
-                damping: 10
-              }}
-              className="relative inline-flex items-center gap-3 px-8 py-4 md:px-10 md:py-5 rounded-3xl mb-10"
-              style={{
-                background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.4) 0%, rgba(234, 88, 12, 0.5) 50%, rgba(249, 115, 22, 0.4) 100%)',
-                backgroundSize: '200% 200%',
-                animation: 'gradientMove 3s ease infinite',
-                border: '3px solid rgba(249, 115, 22, 0.7)',
-                boxShadow: '0 0 30px rgba(249, 115, 22, 0.4), 0 0 60px rgba(249, 115, 22, 0.2), inset 0 0 20px rgba(249, 115, 22, 0.1)'
-              }}
-            >
-              {/* Pulsing Glow Effect */}
-              <motion.div
-                className="absolute inset-0 rounded-3xl"
-                animate={{
-                  boxShadow: [
-                    '0 0 30px rgba(249, 115, 22, 0.4)',
-                    '0 0 50px rgba(249, 115, 22, 0.6)',
-                    '0 0 30px rgba(249, 115, 22, 0.4)'
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              />
-
-              {/* Rotating Spinner */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="w-7 h-7 md:w-8 md:h-8 border-4 border-white border-t-transparent rounded-full flex-shrink-0 relative z-10"
-              />
-
-              {/* Text with Typing Effect */}
-              <div className="relative z-10 flex items-center gap-1">
-                <span className="text-white font-black text-xl md:text-3xl lg:text-4xl tracking-wider drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                  {devText}
-                  <motion.span
-                    animate={{ opacity: [1, 0] }}
-                    transition={{ duration: 0.7, repeat: Infinity }}
-                    className="ml-1"
-                  >
-                    |
-                  </motion.span>
-                </span>
-              </div>
-
-              {/* CSS Animation */}
-              <style>{`
-                @keyframes gradientMove {
-                  0% { background-position: 0% 50%; }
-                  50% { background-position: 100% 50%; }
-                  100% { background-position: 0% 50%; }
-                }
-              `}</style>
             </motion.div>
 
             {/* Main Heading */}
