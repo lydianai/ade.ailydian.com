@@ -1,0 +1,826 @@
+// ADE Database Schema - Production-ready
+// PostgreSQL + Prisma ORM
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// CORE MODELS
+// ============================================
+
+enum UserRole {
+  ESNAF        // Esnaf (bakkal, kuaför, vb.)
+  KOBI         // KOBİ (1-49 çalışan)
+  VATANDAS     // Vatandaş (bireysel)
+  KAMU         // Kamu çalışanı
+  ADMIN        // Platform yöneticisi
+  SUPER_ADMIN  // Sistem yöneticisi
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  PENDING_VERIFICATION
+}
+
+model User {
+  id              String      @id @default(uuid())
+  email           String      @unique
+  emailVerified   Boolean     @default(false)
+  phone           String?     @unique
+  phoneVerified   Boolean     @default(false)
+
+  // TC Kimlik No (encrypted)
+  tcNo            String?     @unique
+
+  // Password (bcrypt hashed)
+  passwordHash    String
+
+  // Profile
+  firstName       String
+  lastName        String
+  dateOfBirth     DateTime?
+  role            UserRole    @default(VATANDAS)
+  status          UserStatus  @default(PENDING_VERIFICATION)
+
+  // Business info (for ESNAF/KOBI)
+  businessName    String?
+  taxOffice       String?
+  taxNumber       String?     @unique
+  mersisNo        String?     @unique
+
+  // e-İmza bilgileri
+  eSignatureProvider  String?  // TÜRKTRUST, Kamu SM
+  eSignatureCert      String?  // Certificate serial
+
+  // KVKK
+  kvkkConsent     Boolean     @default(false)
+  kvkkConsentDate DateTime?
+  marketingConsent Boolean    @default(false)
+
+  // Security
+  twoFactorEnabled Boolean    @default(false)
+  twoFactorSecret  String?
+  lastLoginAt      DateTime?
+  lastLoginIp      String?
+
+  // Metadata
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  deletedAt       DateTime?   // Soft delete
+
+  // Relations
+  customers       Customer[]
+  invoices        Invoice[]
+  payments        Payment[]
+  taxReturns      TaxReturn[]
+  employees       Employee[]
+  auditLogs       AuditLog[]
+  sessions        Session[]
+  products        Product[]
+  orders          Order[]
+  integrations    Integration[]
+  sgkDeclarations SgkDeclaration[]
+  chatMessages    ChatMessage[]
+  accountingEntries AccountingEntry[]
+
+  @@index([email])
+  @@index([tcNo])
+  @@index([taxNumber])
+  @@index([role, status])
+  @@map("users")
+}
+
+// ============================================
+// AUTHENTICATION & SESSION
+// ============================================
+
+model Session {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // JWT tokens
+  accessToken   String   @unique
+  refreshToken  String   @unique
+
+  // Session info
+  ipAddress     String
+  userAgent     String   @db.Text
+  expiresAt     DateTime
+
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([accessToken])
+  @@index([refreshToken])
+  @@map("sessions")
+}
+
+// ============================================
+// CUSTOMER MANAGEMENT
+// ============================================
+
+enum CustomerType {
+  INDIVIDUAL   // Bireysel
+  CORPORATE    // Kurumsal
+}
+
+model Customer {
+  id            String       @id @default(uuid())
+  userId        String       // Sahibi (esnaf)
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type          CustomerType @default(INDIVIDUAL)
+
+  // Individual
+  firstName     String?
+  lastName      String?
+  tcNo          String?
+
+  // Corporate
+  companyName   String?
+  taxOffice     String?
+  taxNumber     String?
+  mersisNo      String?
+
+  // Contact
+  email         String?
+  phone         String?
+  address       String?      @db.Text
+  city          String?
+  district      String?
+  postalCode    String?
+
+  // Financial
+  creditLimit   Decimal?     @db.Decimal(15, 2)
+  balance       Decimal      @default(0) @db.Decimal(15, 2) // Alacak/Borç
+
+  // Metadata
+  notes         String?      @db.Text
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  // Relations
+  invoices      Invoice[]
+  payments      Payment[]
+  orders        Order[]
+
+  @@index([userId])
+  @@index([email])
+  @@index([taxNumber])
+  @@map("customers")
+}
+
+// ============================================
+// INVOICE & BILLING
+// ============================================
+
+enum InvoiceType {
+  E_FATURA      // e-Fatura (GİB'e giden)
+  E_ARSIV       // e-Arşiv (perakende)
+  E_IRSALIYE    // e-İrsaliye
+  PROFORMA      // Proforma
+  SERBEST       // Serbest meslek makbuzu
+}
+
+enum InvoiceStatus {
+  DRAFT         // Taslak
+  SENT          // Gönderildi (GİB'e)
+  ACCEPTED      // Kabul edildi
+  REJECTED      // Reddedildi
+  CANCELLED     // İptal edildi
+  PAID          // Ödendi
+}
+
+model Invoice {
+  id              String        @id @default(uuid())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id])
+
+  customerId      String?
+  customer        Customer?     @relation(fields: [customerId], references: [id])
+
+  // Invoice info
+  invoiceNo       String        @unique  // ADE2025-000001
+  gibUuid         String?       @unique  // GİB UUID (e-Fatura)
+  type            InvoiceType   @default(E_FATURA)
+  status          InvoiceStatus @default(DRAFT)
+
+  // Dates
+  invoiceDate     DateTime      @default(now())
+  dueDate         DateTime?
+  paidDate        DateTime?
+
+  // Amounts
+  subtotal        Decimal       @db.Decimal(15, 2)
+  vatTotal        Decimal       @db.Decimal(15, 2)
+  discountTotal   Decimal       @default(0) @db.Decimal(15, 2)
+  total           Decimal       @db.Decimal(15, 2)
+
+  // Currency
+  currency        String        @default("TRY")
+  exchangeRate    Decimal       @default(1) @db.Decimal(10, 4)
+
+  // Payment
+  paymentMethod   String?       // Nakit, Kredi Kartı, Havale
+  paymentAccount  String?       // IBAN
+
+  // Notes
+  notes           String?       @db.Text
+
+  // e-İmza
+  signedAt        DateTime?
+  signedBy        String?       // e-İmza sertifikası
+
+  // GİB Response
+  gibResponse     Json?         // GİB'den gelen yanıt
+  gibSentAt       DateTime?
+
+  // Files
+  pdfUrl          String?       // PDF URL (S3)
+  xmlUrl          String?       // XML URL (e-Fatura)
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  // Relations
+  items           InvoiceItem[]
+  payments        Payment[]
+
+  @@index([userId])
+  @@index([customerId])
+  @@index([invoiceNo])
+  @@index([status])
+  @@index([invoiceDate])
+  @@map("invoices")
+}
+
+model InvoiceItem {
+  id            String   @id @default(uuid())
+  invoiceId     String
+  invoice       Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  // Item info
+  name          String
+  description   String?  @db.Text
+  quantity      Decimal  @db.Decimal(10, 2)
+  unit          String   @default("Adet")
+
+  // Pricing
+  unitPrice     Decimal  @db.Decimal(15, 2)
+  vatRate       Decimal  @db.Decimal(5, 2)  // %20, %10, %1
+  discountRate  Decimal  @default(0) @db.Decimal(5, 2)
+
+  // Calculated
+  subtotal      Decimal  @db.Decimal(15, 2)
+  vatAmount     Decimal  @db.Decimal(15, 2)
+  discountAmount Decimal @default(0) @db.Decimal(15, 2)
+  total         Decimal  @db.Decimal(15, 2)
+
+  createdAt     DateTime @default(now())
+
+  @@index([invoiceId])
+  @@map("invoice_items")
+}
+
+// ============================================
+// PAYMENT
+// ============================================
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  CANCELLED
+  REFUNDED
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
+
+  invoiceId     String?
+  invoice       Invoice?      @relation(fields: [invoiceId], references: [id])
+
+  customerId    String?
+  customer      Customer?     @relation(fields: [customerId], references: [id])
+
+  // Payment info
+  amount        Decimal       @db.Decimal(15, 2)
+  currency      String        @default("TRY")
+  method        String        // Nakit, Kredi Kartı, Havale, EFT
+
+  status        PaymentStatus @default(PENDING)
+
+  // Bank/Gateway
+  bankName      String?
+  accountNo     String?
+  transactionId String?       @unique
+
+  // Dates
+  paymentDate   DateTime      @default(now())
+  valueDate     DateTime?
+
+  notes         String?       @db.Text
+
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([invoiceId])
+  @@index([status])
+  @@index([paymentDate])
+  @@map("payments")
+}
+
+// ============================================
+// TAX & COMPLIANCE
+// ============================================
+
+enum TaxType {
+  KDV           // Katma Değer Vergisi
+  GELIR_VERGISI // Gelir Vergisi
+  STOPAJ        // Stopaj
+  DAMGA_VERGISI // Damga Vergisi
+  KURUMLAR      // Kurumlar Vergisi
+}
+
+model TaxReturn {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  type          TaxType
+  period        String   // "2025-01" (Ocak 2025)
+  year          Int
+  month         Int?
+
+  // Amounts
+  taxableAmount Decimal  @db.Decimal(15, 2)
+  taxAmount     Decimal  @db.Decimal(15, 2)
+
+  // Status
+  status        String   @default("DRAFT") // DRAFT, SUBMITTED, PAID
+
+  // GİB
+  gibReference  String?  @unique
+  submittedAt   DateTime?
+  paidAt        DateTime?
+
+  dueDate       DateTime
+
+  // Files
+  declarationFile String? // PDF URL
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@unique([userId, type, period])
+  @@index([userId])
+  @@index([type])
+  @@index([dueDate])
+  @@map("tax_returns")
+}
+
+// ============================================
+// EMPLOYEE & PAYROLL (SGK)
+// ============================================
+
+enum EmployeeType {
+  FULL_TIME_4A   // 4/a (Tam zamanlı)
+  PART_TIME_4A   // 4/a (Yarı zamanlı)
+  FREELANCE_4B   // 4/b (Serbest)
+  SELF_EMPLOYED_4C // 4/c (Bağımsız)
+}
+
+model Employee {
+  id            String       @id @default(uuid())
+  userId        String       // İşveren
+  user          User         @relation(fields: [userId], references: [id])
+
+  // Personal
+  tcNo          String
+  firstName     String
+  lastName      String
+  dateOfBirth   DateTime
+
+  // Employment
+  type          EmployeeType @default(FULL_TIME_4A)
+  startDate     DateTime
+  endDate       DateTime?
+
+  // Salary
+  grossSalary   Decimal      @db.Decimal(15, 2)
+  netSalary     Decimal      @db.Decimal(15, 2)
+
+  // SGK
+  sgkNo         String?
+  sgkRegistered Boolean      @default(false)
+  sgkStartDate  DateTime?
+
+  // Contact
+  phone         String?
+  email         String?
+  address       String?      @db.Text
+
+  status        String       @default("ACTIVE") // ACTIVE, INACTIVE, TERMINATED
+
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  deletedAt     DateTime?
+
+  @@index([userId])
+  @@index([tcNo])
+  @@index([status])
+  @@map("employees")
+}
+
+// ============================================
+// AUDIT LOG (KVKK Compliance)
+// ============================================
+
+enum AuditAction {
+  CREATE
+  READ
+  UPDATE
+  DELETE
+  LOGIN
+  LOGOUT
+  EXPORT
+  PRINT
+}
+
+model AuditLog {
+  id            String      @id @default(uuid())
+  userId        String?
+  user          User?       @relation(fields: [userId], references: [id])
+
+  action        AuditAction
+  resource      String      // "Invoice", "Customer", "User"
+  resourceId    String?
+
+  // Details
+  changes       Json?       // Before/After değerler
+  ipAddress     String
+  userAgent     String      @db.Text
+
+  createdAt     DateTime    @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([resource])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ============================================
+// E-COMMERCE
+// ============================================
+
+model Product {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Product Info
+  name          String
+  description   String?  @db.Text
+  sku           String?  @unique
+  barcode       String?
+
+  // Pricing
+  price         Decimal  @db.Decimal(15, 2)
+  costPrice     Decimal? @db.Decimal(15, 2)
+  salePrice     Decimal? @db.Decimal(15, 2)
+  currency      String   @default("TRY")
+
+  // Stock
+  stock         Int      @default(0)
+  lowStockAlert Int?     @default(10)
+
+  // Tax
+  vatRate       Decimal  @db.Decimal(5, 2) @default(20)
+
+  // Category
+  category      String?
+  brand         String?
+
+  // Status
+  isActive      Boolean  @default(true)
+  isFeatured    Boolean  @default(false)
+
+  // Images
+  imageUrl      String?
+  images        Json?    // Array of image URLs
+
+  // Platform Integration
+  platformProducts Json?  // E-commerce platform integration data
+
+  // Metadata
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  deletedAt     DateTime?
+
+  // Relations
+  orderItems    OrderItem[]
+
+  @@index([userId])
+  @@index([sku])
+  @@index([category])
+  @@index([isActive])
+  @@map("products")
+}
+
+enum OrderStatus {
+  PENDING       // Bekliyor
+  CONFIRMED     // Onaylandı
+  PROCESSING    // Hazırlanıyor
+  SHIPPED       // Kargoda
+  DELIVERED     // Teslim edildi
+  CANCELLED     // İptal edildi
+  REFUNDED      // İade edildi
+}
+
+model Order {
+  id            String      @id @default(uuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+
+  customerId    String?
+  customer      Customer?   @relation(fields: [customerId], references: [id])
+
+  // Order Info
+  orderNumber   String      @unique // ORD-2025-000001
+  status        OrderStatus @default(PENDING)
+
+  // Amounts
+  subtotal      Decimal     @db.Decimal(15, 2)
+  vatTotal      Decimal     @db.Decimal(15, 2)
+  discountTotal Decimal     @default(0) @db.Decimal(15, 2)
+  shippingCost  Decimal     @default(0) @db.Decimal(15, 2)
+  total         Decimal     @db.Decimal(15, 2)
+
+  // Currency
+  currency      String      @default("TRY")
+
+  // Shipping
+  shippingAddress Json?     // {street, city, district, postalCode, country}
+  trackingNumber  String?
+
+  // Payment
+  paymentMethod   String?   // Kredi Kartı, Havale, Kapıda Ödeme
+  paymentStatus   String    @default("pending") // pending, paid, failed
+  paidAt          DateTime?
+
+  // Dates
+  orderDate       DateTime  @default(now())
+  confirmedAt     DateTime?
+  shippedAt       DateTime?
+  deliveredAt     DateTime?
+
+  // Notes
+  customerNotes   String?   @db.Text
+  adminNotes      String?   @db.Text
+
+  // Metadata
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  // Relations
+  items           OrderItem[]
+
+  @@index([userId])
+  @@index([customerId])
+  @@index([orderNumber])
+  @@index([status])
+  @@index([orderDate])
+  @@map("orders")
+}
+
+model OrderItem {
+  id            String  @id @default(uuid())
+  orderId       String
+  order         Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  productId     String?
+  product       Product? @relation(fields: [productId], references: [id])
+
+  // Item Info
+  productName   String
+  sku           String?
+  quantity      Int
+  unitPrice     Decimal @db.Decimal(15, 2)
+
+  // Tax
+  vatRate       Decimal @db.Decimal(5, 2)
+  vatAmount     Decimal @db.Decimal(15, 2)
+
+  // Discount
+  discountRate  Decimal @default(0) @db.Decimal(5, 2)
+  discountAmount Decimal @default(0) @db.Decimal(15, 2)
+
+  // Calculated
+  subtotal      Decimal @db.Decimal(15, 2)
+  total         Decimal @db.Decimal(15, 2)
+
+  createdAt     DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+// ============================================
+// INTEGRATIONS (GİB, SGK, e-Devlet)
+// ============================================
+
+enum IntegrationType {
+  GIB           // GİB e-Fatura/e-Arşiv
+  SGK           // SGK e-Sigorta
+  EDEVLET       // e-Devlet Gateway
+  VERGI_DAIRESI // Vergi Dairesi
+  BANKA         // Banka entegrasyonu
+  MUHASEBE      // Muhasebe yazılımı
+  OTHER         // Diğer
+}
+
+enum IntegrationStatus {
+  ACTIVE
+  INACTIVE
+  PENDING
+  CONNECTED
+  DISCONNECTED
+  ERROR
+  EXPIRED
+}
+
+model Integration {
+  id            String             @id @default(uuid())
+  userId        String
+  user          User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Integration Info
+  type          IntegrationType
+  status        IntegrationStatus  @default(PENDING)
+  name          String
+  platform      String?            // Platform identifier (trendyol, hepsiburada, n11, etc.)
+
+  // Credentials (encrypted)
+  apiKey        String?
+  apiSecret     String?
+  username      String?
+  password      String?
+  certificate   String?            @db.Text // e-İmza sertifikası
+
+  // Configuration
+  config        Json?              // Provider-specific config
+  webhookUrl    String?
+
+  // Usage
+  lastSyncAt    DateTime?
+  syncFrequency String?            // hourly, daily, weekly
+  isAutoSync    Boolean            @default(false)
+
+  // Limits
+  monthlyQuota  Int?
+  usedQuota     Int                @default(0)
+
+  // Metadata
+  notes         String?            @db.Text
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  deletedAt     DateTime?
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@map("integrations")
+}
+
+// ============================================
+// SGK DECLARATIONS
+// ============================================
+
+enum SgkDeclarationStatus {
+  DRAFT         // Taslak
+  SUBMITTED     // Gönderildi
+  APPROVED      // Onaylandı
+  REJECTED      // Reddedildi
+  PAID          // Ödendi
+}
+
+model SgkDeclaration {
+  id            String                @id @default(uuid())
+  userId        String
+  user          User                  @relation(fields: [userId], references: [id])
+
+  // Declaration Info
+  period        String                // "2025-01" (Ocak 2025)
+  year          Int
+  month         Int
+  declarationType String              // "AYLIK", "GÜNDELİK", "SON_AYRILMA"
+
+  status        SgkDeclarationStatus  @default(DRAFT)
+
+  // Employees Count
+  employeeCount Int                   @default(0)
+
+  // Premium Amounts
+  employeePremium     Decimal         @db.Decimal(15, 2) @default(0)
+  employerPremium     Decimal         @db.Decimal(15, 2) @default(0)
+  totalPremium        Decimal         @db.Decimal(15, 2) @default(0)
+
+  // Unemployment Insurance
+  unemploymentEmployee Decimal        @db.Decimal(15, 2) @default(0)
+  unemploymentEmployer Decimal        @db.Decimal(15, 2) @default(0)
+
+  // SGK Response
+  sgkReference  String?               @unique
+  sgkResponse   Json?
+  submittedAt   DateTime?
+  approvedAt    DateTime?
+
+  // Payment
+  dueDate       DateTime?
+  paidAt        DateTime?
+  paymentReference String?
+
+  // Files
+  declarationFile String?             // PDF URL
+
+  // Metadata
+  notes         String?               @db.Text
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+
+  @@unique([userId, period])
+  @@index([userId])
+  @@index([period])
+  @@index([status])
+  @@index([dueDate])
+  @@map("sgk_declarations")
+}
+
+// ============================================
+// AI CHAT MESSAGES
+// ============================================
+
+model ChatMessage {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  role      String   // user, assistant, system
+  content   String   @db.Text
+  context   Json?    // Additional context
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([createdAt])
+  @@map("chat_messages")
+}
+
+// ============================================
+// ACCOUNTING ENTRIES
+// ============================================
+
+model AccountingEntry {
+  id            String   @id @default(uuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  // Entry Info
+  entryDate     DateTime @default(now())
+  description   String
+  amount        Decimal  @db.Decimal(15, 2)
+
+  // Account codes
+  debitAccount  String
+  creditAccount String
+
+  // References
+  invoiceId     String?
+  paymentId     String?
+
+  // Metadata
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([userId])
+  @@index([entryDate])
+  @@map("accounting_entries")
+}

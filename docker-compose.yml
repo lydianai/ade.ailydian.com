@@ -1,0 +1,126 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: ade-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ade_user
+      POSTGRES_PASSWORD: ade_password_change_in_production
+      POSTGRES_DB: ade_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ade_user -d ade_db']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ade-network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: ade-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --requirepass ade_redis_password_change_in_production
+      --maxmemory 512mb
+      --maxmemory-policy allkeys-lru
+      --save 60 1
+      --loglevel warning
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', '--raw', 'incr', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - ade-network
+
+  # Elasticsearch (for logging and search)
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: ade-elasticsearch
+    restart: unless-stopped
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ports:
+      - '9200:9200'
+      - '9300:9300'
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    networks:
+      - ade-network
+    profiles:
+      - monitoring
+
+  # Kibana (Elasticsearch UI)
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: ade-kibana
+    restart: unless-stopped
+    environment:
+      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+    ports:
+      - '5601:5601'
+    depends_on:
+      - elasticsearch
+    networks:
+      - ade-network
+    profiles:
+      - monitoring
+
+  # Adminer (Database UI - development only)
+  adminer:
+    image: adminer:latest
+    container_name: ade-adminer
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    environment:
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: dracula
+    networks:
+      - ade-network
+    profiles:
+      - dev
+
+  # Redis Commander (Redis UI - development only)
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: ade-redis-commander
+    restart: unless-stopped
+    environment:
+      REDIS_HOSTS: local:redis:6379:0:ade_redis_password_change_in_production
+    ports:
+      - '8081:8081'
+    depends_on:
+      - redis
+    networks:
+      - ade-network
+    profiles:
+      - dev
+
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  elasticsearch_data:
+    driver: local
+
+networks:
+  ade-network:
+    driver: bridge

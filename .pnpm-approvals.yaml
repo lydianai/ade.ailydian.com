@@ -1,0 +1,7 @@
+# Approved build scripts for ADE
+@nestjs/core
+@prisma/client
+@prisma/engines
+bcrypt
+esbuild
+prisma

@@ -1,0 +1,31 @@
+# ADE - Akıllı Devlet Ekosistemi
+# Development/Staging Environment
+# DO NOT INDEX - Development version
+
+User-agent: *
+Disallow: /
+
+# Block all search engine crawlers
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+User-agent: archive.org_bot
+Disallow: /
