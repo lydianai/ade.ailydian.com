@@ -19,61 +19,8 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default function AnaSayfa() {
-  // ✅ İlk render'da full text göster - Cache Bust: 1769352347
-  const [devText, setDevText] = useState('GELİŞTİRME AŞAMASINDA')
-  const [isClient, setIsClient] = useState(false)
-
-  // ✅ Client-side olduğumuzu işaretle
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
-
-  // ✅ Daktilo efektini sadece client-side başlat
-  useEffect(() => {
-    if (!isClient) return
-
-    if (import.meta.env.DEV) {
-      console.log('🎯 Starting typing animation')
-    }
-
-    const fullText = 'GELİŞTİRME AŞAMASINDA'
-    let index = 0
-    let isTyping = true
-    let typingInterval: NodeJS.Timeout
-    let resetTimeout: NodeJS.Timeout
-
-    const typeText = () => {
-      typingInterval = setInterval(() => {
-        if (isTyping) {
-          if (index <= fullText.length) {
-            setDevText(fullText.substring(0, index))
-            index++
-          } else {
-            isTyping = false
-            clearInterval(typingInterval)
-            resetTimeout = setTimeout(() => {
-              index = 0
-              isTyping = true
-              setDevText('')
-              typeText()
-            }, 2000)
-          }
-        }
-      }, 100)
-    }
-
-    // İlk animasyonu başlat
-    setTimeout(() => {
-      index = 0
-      setDevText('')
-      typeText()
-    }, 1000)
-
-    return () => {
-      clearInterval(typingInterval)
-      clearTimeout(resetTimeout)
-    }
-  }, [isClient])
+  // ✅ STATIK TEXT - Her zaman görünür, animation yok!
+  const devText = 'GELİŞTİRME AŞAMASINDA'
   const features = [
     {
       icon: CpuChipIcon,
