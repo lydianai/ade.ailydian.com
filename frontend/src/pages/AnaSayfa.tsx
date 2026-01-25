@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import {
   SparklesIcon,
   ShieldCheckIcon,
@@ -18,6 +19,26 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default function AnaSayfa() {
+  const [devText, setDevText] = useState('')
+  const fullDevText = 'GELİŞTİRME AŞAMASINDA'
+
+  useEffect(() => {
+    let index = 0
+    const typingInterval = setInterval(() => {
+      if (index < fullDevText.length) {
+        setDevText(fullDevText.substring(0, index + 1))
+        index++
+      } else {
+        clearInterval(typingInterval)
+        setTimeout(() => {
+          setDevText('')
+          index = 0
+        }, 2000)
+      }
+    }, 100)
+
+    return () => clearInterval(typingInterval)
+  }, [devText])
   const features = [
     {
       icon: CpuChipIcon,
@@ -219,22 +240,67 @@ export default function AnaSayfa() {
               <span className="text-white/90 font-medium">Türkiye'nin İlk Yapay Zeka Devlet Asistanı</span>
             </motion.div>
 
-            {/* Development Status Banner */}
+            {/* Development Status Banner - ULTRA VISIBLE */}
             <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.35 }}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-orange-500/30 to-orange-600/30 border-2 border-orange-500/50 mb-8 shadow-xl shadow-orange-500/20"
+              initial={{ scale: 0.9, opacity: 0, y: -20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.35,
+                type: 'spring',
+                stiffness: 200,
+                damping: 10
+              }}
+              className="relative inline-flex items-center gap-3 px-8 py-4 md:px-10 md:py-5 rounded-3xl mb-10"
+              style={{
+                background: 'linear-gradient(135deg, rgba(249, 115, 22, 0.4) 0%, rgba(234, 88, 12, 0.5) 50%, rgba(249, 115, 22, 0.4) 100%)',
+                backgroundSize: '200% 200%',
+                animation: 'gradientMove 3s ease infinite',
+                border: '3px solid rgba(249, 115, 22, 0.7)',
+                boxShadow: '0 0 30px rgba(249, 115, 22, 0.4), 0 0 60px rgba(249, 115, 22, 0.2), inset 0 0 20px rgba(249, 115, 22, 0.1)'
+              }}
             >
+              {/* Pulsing Glow Effect */}
+              <motion.div
+                className="absolute inset-0 rounded-3xl"
+                animate={{
+                  boxShadow: [
+                    '0 0 30px rgba(249, 115, 22, 0.4)',
+                    '0 0 50px rgba(249, 115, 22, 0.6)',
+                    '0 0 30px rgba(249, 115, 22, 0.4)'
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              />
+
+              {/* Rotating Spinner */}
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                className="w-6 h-6 border-3 border-white border-t-transparent rounded-full flex-shrink-0"
-                style={{ borderWidth: '3px' }}
+                className="w-7 h-7 md:w-8 md:h-8 border-4 border-white border-t-transparent rounded-full flex-shrink-0 relative z-10"
               />
-              <span className="text-white font-bold text-lg md:text-xl tracking-wide">
-                GELİŞTİRME AŞAMASINDA
-              </span>
+
+              {/* Text with Typing Effect */}
+              <div className="relative z-10 flex items-center gap-1">
+                <span className="text-white font-black text-xl md:text-3xl lg:text-4xl tracking-wider drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                  {devText}
+                  <motion.span
+                    animate={{ opacity: [1, 0] }}
+                    transition={{ duration: 0.7, repeat: Infinity }}
+                    className="ml-1"
+                  >
+                    |
+                  </motion.span>
+                </span>
+              </div>
+
+              {/* CSS Animation */}
+              <style>{`
+                @keyframes gradientMove {
+                  0% { background-position: 0% 50%; }
+                  50% { background-position: 100% 50%; }
+                  100% { background-position: 0% 50%; }
+                }
+              `}</style>
             </motion.div>
 
             {/* Main Heading */}
