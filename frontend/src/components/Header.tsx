@@ -37,8 +37,9 @@ export default function Header() {
       <div className="container-custom">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="group">
-            <Logo size="md" animated={false} showText={true} variant="white" />
+          <Link to="/" className="group flex items-center gap-2">
+            <Logo size="sm" animated={false} showText={false} variant="white" />
+            <span className="text-xl font-bold text-white hidden sm:block">ADE</span>
           </Link>
 
           {/* Desktop Navigation */}
