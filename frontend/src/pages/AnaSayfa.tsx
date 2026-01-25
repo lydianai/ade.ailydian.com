@@ -19,26 +19,61 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default function AnaSayfa() {
-  const [devText, setDevText] = useState('')
-  const fullDevText = 'GELİŞTİRME AŞAMASINDA'
+  // ✅ İlk render'da full text göster
+  const [devText, setDevText] = useState('GELİŞTİRME AŞAMASINDA')
+  const [isClient, setIsClient] = useState(false)
 
+  // ✅ Client-side olduğumuzu işaretle
   useEffect(() => {
-    let index = 0
-    const typingInterval = setInterval(() => {
-      if (index < fullDevText.length) {
-        setDevText(fullDevText.substring(0, index + 1))
-        index++
-      } else {
-        clearInterval(typingInterval)
-        setTimeout(() => {
-          setDevText('')
-          index = 0
-        }, 2000)
-      }
-    }, 100)
+    setIsClient(true)
+  }, [])
 
-    return () => clearInterval(typingInterval)
-  }, [devText])
+  // ✅ Daktilo efektini sadece client-side başlat
+  useEffect(() => {
+    if (!isClient) return
+
+    if (import.meta.env.DEV) {
+      console.log('🎯 Starting typing animation')
+    }
+
+    const fullText = 'GELİŞTİRME AŞAMASINDA'
+    let index = 0
+    let isTyping = true
+    let typingInterval: NodeJS.Timeout
+    let resetTimeout: NodeJS.Timeout
+
+    const typeText = () => {
+      typingInterval = setInterval(() => {
+        if (isTyping) {
+          if (index <= fullText.length) {
+            setDevText(fullText.substring(0, index))
+            index++
+          } else {
+            isTyping = false
+            clearInterval(typingInterval)
+            resetTimeout = setTimeout(() => {
+              index = 0
+              isTyping = true
+              setDevText('')
+              typeText()
+            }, 2000)
+          }
+        }
+      }, 100)
+    }
+
+    // İlk animasyonu başlat
+    setTimeout(() => {
+      index = 0
+      setDevText('')
+      typeText()
+    }, 1000)
+
+    return () => {
+      clearInterval(typingInterval)
+      clearTimeout(resetTimeout)
+    }
+  }, [isClient])
   const features = [
     {
       icon: CpuChipIcon,
@@ -230,19 +265,20 @@ export default function AnaSayfa() {
             transition={{ duration: 0.6 }}
             className="flex justify-center mb-12"
           >
-            <div className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-orange-600 border-4 border-orange-400 shadow-2xl">
+            <div className="inline-flex items-center gap-4 px-8 py-6 rounded-2xl bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 border-4 border-yellow-400 shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                className="w-8 h-8 border-4 border-white border-t-transparent rounded-full"
+                className="w-10 h-10 border-4 border-yellow-300 border-t-transparent rounded-full flex-shrink-0"
               />
-              <span className="text-white font-black text-2xl md:text-4xl tracking-widest uppercase">
-                {devText || 'GELİŞTİRME AŞAMASINDA'}
+              <span className="text-yellow-100 font-black text-3xl md:text-5xl tracking-wider uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                {devText}
                 <motion.span
-                  animate={{ opacity: [1, 0] }}
-                  transition={{ duration: 0.8, repeat: Infinity }}
+                  animate={{ opacity: [1, 0, 1] }}
+                  transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
+                  className="inline-block ml-1 text-yellow-300"
                 >
-                  |
+                  █
                 </motion.span>
               </span>
             </div>

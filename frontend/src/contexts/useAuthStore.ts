@@ -73,6 +73,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   },
 
   demoGiris: () => {
+    if (import.meta.env.DEV) {
+      console.log('🔐 demoGiris() called')
+    }
+
     const demoUser = {
       id: 'demo-user-123',
       email: 'demo@ade.gov.tr',
@@ -83,6 +87,11 @@ export const useAuthStore = create<AuthState>((set) => ({
     }
 
     const demoToken = 'demo-token-' + Date.now()
+
+    if (import.meta.env.DEV) {
+      console.log('💾 Saving to localStorage (dev only)')
+    }
+
     localStorage.setItem('accessToken', demoToken)
     localStorage.setItem('refreshToken', demoToken)
     localStorage.setItem('user', JSON.stringify(demoUser))
@@ -96,6 +105,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       loading: false,
       error: null,
     })
+
+    if (import.meta.env.DEV) {
+      console.log('✅ demoGiris() complete')
+    }
   },
 
   kayitOl: async (data) => {

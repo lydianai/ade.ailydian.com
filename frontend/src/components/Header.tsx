@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useAuthStore } from '../contexts/useAuthStore'
 import Logo from './Logo'
 
 export default function Header() {
+  const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isAuthenticated, user, demoGiris } = useAuthStore()
@@ -70,17 +71,18 @@ export default function Header() {
               </Link>
             ) : (
               <>
-                <Link
-                  to="/panel"
-                  onClick={(e) => {
-                    e.preventDefault()
+                <button
+                  onClick={() => {
+                    if (import.meta.env.DEV) {
+                      console.log('🎯 Demo İncele clicked')
+                    }
                     demoGiris()
-                    window.location.href = '/panel'
+                    navigate('/panel')
                   }}
                   className="btn-primary"
                 >
                   🎯 Demo İncele
-                </Link>
+                </button>
                 <Link to="/giris-yap" className="btn-ghost">
                   Giriş Yap
                 </Link>
@@ -132,18 +134,19 @@ export default function Header() {
                     </Link>
                   ) : (
                     <>
-                      <Link
-                        to="/panel"
-                        className="btn-primary text-center"
-                        onClick={(e) => {
-                          e.preventDefault()
+                      <button
+                        className="btn-primary text-center w-full"
+                        onClick={() => {
+                          if (import.meta.env.DEV) {
+                            console.log('🎯 Demo İncele clicked (mobile)')
+                          }
                           demoGiris()
                           setIsMobileMenuOpen(false)
-                          window.location.href = '/panel'
+                          navigate('/panel')
                         }}
                       >
                         🎯 Demo İncele
-                      </Link>
+                      </button>
                       <Link
                         to="/giris-yap"
                         className="btn-secondary text-center"
