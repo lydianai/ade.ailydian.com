@@ -1,6 +1,12 @@
 import { defineConfig, presetUno, presetAttributify, presetIcons } from 'unocss'
 
 export default defineConfig({
+  content: {
+    filesystem: [
+      'src/**/*.{ts,tsx,js,jsx}',
+      'index.html',
+    ],
+  },
   presets: [
     presetUno(),
     presetAttributify(),

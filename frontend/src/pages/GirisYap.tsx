@@ -6,9 +6,14 @@ import { useAuthStore } from '../contexts/useAuthStore'
 
 export default function GirisYap() {
   const navigate = useNavigate()
-  const { girisYap, loading, error, clearError } = useAuthStore()
+  const { girisYap, demoGiris, loading, error, clearError } = useAuthStore()
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({ email: '', password: '' })
+
+  const handleDemoLogin = () => {
+    demoGiris()
+    navigate('/panel')
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -116,6 +121,21 @@ export default function GirisYap() {
             {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
           </button>
         </form>
+
+        {/* Demo Login */}
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={handleDemoLogin}
+            className="btn-secondary w-full bg-gradient-to-r from-amber-500/20 to-teal-500/20 border border-amber-500/30 hover:border-amber-500/50"
+          >
+            <span className="mr-2">🎯</span>
+            Demo ile Hızlı Giriş
+          </button>
+          <p className="text-xs text-white/50 text-center mt-2">
+            Kullanıcı adı: demo | Şifre: demo
+          </p>
+        </div>
 
         {/* Divider */}
         <div className="relative my-8">

@@ -8,7 +8,7 @@ import Logo from './Logo'
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { isAuthenticated, user } = useAuthStore()
+  const { isAuthenticated, user, demoGiris } = useAuthStore()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,10 +29,14 @@ export default function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-12 left-0 right-0 z-40 transition-all duration-300 ${
+      className={`fixed left-0 right-0 transition-all duration-300 ${
         isScrolled ? 'glass-card py-3' : 'bg-transparent py-5'
       }`}
-      style={{ marginTop: '0px' }}
+      style={{
+        top: '40px',
+        zIndex: 100,
+        pointerEvents: 'auto'
+      }}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between">
@@ -67,11 +71,19 @@ export default function Header() {
               </Link>
             ) : (
               <>
+                <Link
+                  to="/panel"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    demoGiris()
+                    window.location.href = '/panel'
+                  }}
+                  className="btn-primary"
+                >
+                  🎯 Demo İncele
+                </Link>
                 <Link to="/giris-yap" className="btn-ghost">
                   Giriş Yap
-                </Link>
-                <Link to="/kayit-ol" className="btn-primary">
-                  Ücretsiz Başla
                 </Link>
               </>
             )}
@@ -122,18 +134,23 @@ export default function Header() {
                   ) : (
                     <>
                       <Link
+                        to="/panel"
+                        className="btn-primary text-center"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          demoGiris()
+                          setIsMobileMenuOpen(false)
+                          window.location.href = '/panel'
+                        }}
+                      >
+                        🎯 Demo İncele
+                      </Link>
+                      <Link
                         to="/giris-yap"
                         className="btn-secondary text-center"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         Giriş Yap
-                      </Link>
-                      <Link
-                        to="/kayit-ol"
-                        className="btn-primary text-center"
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
-                        Ücretsiz Başla
                       </Link>
                     </>
                   )}

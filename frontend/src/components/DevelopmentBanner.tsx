@@ -27,9 +27,15 @@ const DevelopmentBanner: React.FC = () => {
     <motion.div
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white py-3 px-4 shadow-lg"
+      className="fixed top-0 left-0 right-0 bg-gradient-to-r from-orange-500 via-orange-600 to-orange-500 text-white px-4 shadow-lg"
       style={{
         background: 'linear-gradient(90deg, #F97316 0%, #EA580C 50%, #F97316 100%)',
+        height: '40px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 99,
+        pointerEvents: 'none',
       }}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-center gap-3">

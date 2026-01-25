@@ -3,6 +3,11 @@ import { ConfigService } from '@nestjs/config';
 import Anthropic from '@anthropic-ai/sdk';
 import { HfInference } from '@huggingface/inference';
 import OpenAI from 'openai';
+
+// AI Provider aliases (obfuscated model names)
+const AI_PROVIDER_PRIMARY = 'primary-llm';
+const AI_PROVIDER_VOICE = 'voice-llm';
+const AI_PROVIDER_STT = 'stt-engine';
 import {
   ChatRequestDto,
   ChatResponseDto,
@@ -15,9 +20,9 @@ import {
  * AI Service - Multi-Model AI Engine
  *
  * Primary Models:
- * - Claude 4 (Anthropic): Text reasoning and Turkish language understanding
- * - NVIDIA Personaplex-7B: Voice-to-voice personalized assistant
- * - Whisper (OpenAI): Speech-to-text transcription
+ * - Primary LLM: Text reasoning and Turkish language understanding
+ * - Voice LLM: Voice-to-voice personalized assistant
+ * - STT Engine: Speech-to-text transcription
  *
  * Capabilities:
  * - Text chat with context awareness
@@ -55,45 +60,45 @@ Davranış kuralları:
 Yasal uyarı: Verdiğin bilgiler rehberlik amaçlıdır, resmi hukuki danışmanlık yerine geçmez.`;
 
   constructor(private configService: ConfigService) {
-    // Initialize Claude 4
+    // Initialize Primary LLM
     const anthropicKey = this.configService.get<string>('ANTHROPIC_API_KEY');
     if (anthropicKey) {
       this.anthropic = new Anthropic({
         apiKey: anthropicKey,
       });
-      this.logger.log('✅ Claude 4 initialized');
+      this.logger.log(`✅ ${AI_PROVIDER_PRIMARY} initialized`);
     } else {
-      this.logger.warn('⚠️  ANTHROPIC_API_KEY not found - Claude features disabled');
+      this.logger.warn(`⚠️  Primary LLM not configured - Text AI features disabled`);
     }
 
-    // Initialize HuggingFace (for Personaplex-7B)
+    // Initialize Voice LLM
     const hfToken = this.configService.get<string>('HUGGINGFACE_API_KEY');
     if (hfToken) {
       this.hf = new HfInference(hfToken);
-      this.logger.log('✅ HuggingFace inference initialized (Personaplex-7B ready)');
+      this.logger.log(`✅ ${AI_PROVIDER_VOICE} initialized`);
     } else {
-      this.logger.warn('⚠️  HUGGINGFACE_API_KEY not found - Voice features disabled');
+      this.logger.warn(`⚠️  Voice LLM not configured - Voice features disabled`);
     }
 
-    // Initialize OpenAI (for Whisper STT)
+    // Initialize STT Engine
     const openaiKey = this.configService.get<string>('OPENAI_API_KEY');
     if (openaiKey) {
       this.openai = new OpenAI({
         apiKey: openaiKey,
       });
-      this.logger.log('✅ OpenAI initialized (Whisper STT ready)');
+      this.logger.log(`✅ ${AI_PROVIDER_STT} initialized`);
     } else {
-      this.logger.warn('⚠️  OPENAI_API_KEY not found - Speech-to-text disabled');
+      this.logger.warn(`⚠️  STT Engine not configured - Speech-to-text disabled`);
     }
   }
 
   /**
-   * Text Chat with Claude 4
+   * Text Chat with Primary LLM
    */
   async chat(userId: string, dto: ChatRequestDto): Promise<ChatResponseDto> {
     try {
       if (!this.anthropic) {
-        throw new InternalServerErrorException('Claude AI is not configured');
+        throw new InternalServerErrorException('Primary LLM is not configured');
       }
 
       this.logger.log(`💬 Chat request from user ${userId}`);

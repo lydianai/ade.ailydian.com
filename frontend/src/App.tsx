@@ -52,7 +52,7 @@ function App() {
       <div className="gradient-mesh-bg" aria-hidden="true" />
 
       {/* Routes */}
-      <div className="relative z-10 pt-24">
+      <div className="relative z-10" style={{ paddingTop: '40px' }}>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<AnaSayfa />} />

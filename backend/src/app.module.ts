@@ -27,7 +27,7 @@ import { BulkOperationsModule } from './bulk-operations/bulk-operations.module';
  * - Rate limiting (100 requests per minute)
  * - Database connection
  * - Feature modules
- * - AI Engine (Claude 4 + NVIDIA Personaplex-7B)
+ * - AI Engine (Primary LLM + Voice LLM + STT Engine)
  * - Integrations (e-Devlet, GİB, SGK)
  */
 @Module({
