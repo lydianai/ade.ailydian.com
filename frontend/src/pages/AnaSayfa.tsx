@@ -205,32 +205,6 @@ export default function AnaSayfa() {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl" style={{ animationDelay: '2s' }} />
 
         <div className="container-custom relative z-10">
-          {/* DEVELOPMENT BANNER - EN ÜST SIRADA */}
-          <motion.div
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex justify-center mb-12"
-          >
-            <div className="inline-flex items-center gap-4 px-8 py-6 rounded-2xl bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 border-4 border-yellow-400 shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse">
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                className="w-10 h-10 border-4 border-yellow-300 border-t-transparent rounded-full flex-shrink-0"
-              />
-              <span className="text-yellow-100 font-black text-3xl md:text-5xl tracking-wider uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-                {devText}
-                <motion.span
-                  animate={{ opacity: [1, 0, 1] }}
-                  transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
-                  className="inline-block ml-1 text-yellow-300"
-                >
-                  █
-                </motion.span>
-              </span>
-            </div>
-          </motion.div>
-
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -272,6 +246,38 @@ export default function AnaSayfa() {
               18 bakanlık ve kurumla entegre, yapay zeka destekli, hukuken geçerli işlemler yapabilen
               tek platform. Vergilerinizi, SGK primlerinizi, faturalarınızı otomatik yönetin.
             </motion.p>
+
+            {/* DEVELOPMENT BANNER + PANEL BUTTON */}
+            <div className="flex flex-col items-center gap-6 my-12">
+              {/* Development Banner */}
+              <div className="inline-flex items-center gap-4 px-8 py-6 rounded-2xl bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 border-4 border-yellow-400 shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
+                  className="w-10 h-10 border-4 border-yellow-300 border-t-transparent rounded-full flex-shrink-0"
+                />
+                <span className="text-yellow-100 font-black text-3xl md:text-5xl tracking-wider uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
+                  {devText}
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
+                    className="inline-block ml-1 text-yellow-300"
+                  >
+                    █
+                  </motion.span>
+                </span>
+              </div>
+
+              {/* Panel Access Button */}
+              <Link
+                to="/panel"
+                className="btn-primary text-xl px-12 py-6 inline-flex items-center gap-3 shadow-2xl shadow-amber-500/30 hover:shadow-amber-500/50 transform hover:scale-105 transition-all"
+              >
+                <span>🎯</span>
+                <span className="font-bold">Paneli İncele (Giriş Gerektirmez)</span>
+                <ArrowRightIcon className="w-6 h-6" />
+              </Link>
+            </div>
 
             {/* Stats */}
             <motion.div
