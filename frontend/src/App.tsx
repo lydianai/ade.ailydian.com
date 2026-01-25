@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom'
-import DevelopmentBanner from './components/DevelopmentBanner'
 import AnaSayfa from './pages/AnaSayfa'
 import GirisYap from './pages/GirisYap'
 import KayitOl from './pages/KayitOl'
@@ -45,14 +44,11 @@ import Community from './pages/Community'
 function App() {
   return (
     <>
-      {/* Development Banner */}
-      <DevelopmentBanner />
-
       {/* Animated Gradient Background (Global) */}
       <div className="gradient-mesh-bg" aria-hidden="true" />
 
       {/* Routes */}
-      <div className="relative z-10" style={{ paddingTop: '40px' }}>
+      <div className="relative z-10">
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<AnaSayfa />} />

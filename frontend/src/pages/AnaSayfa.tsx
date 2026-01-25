@@ -213,10 +213,28 @@ export default function AnaSayfa() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-amber-500/20 to-teal-500/20 border border-amber-500/30 mb-8"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-gradient-to-r from-amber-500/20 to-teal-500/20 border border-amber-500/30 mb-4"
             >
               <SparklesIcon className="w-5 h-5 text-amber-400" />
               <span className="text-white/90 font-medium">Türkiye'nin İlk Yapay Zeka Devlet Asistanı</span>
+            </motion.div>
+
+            {/* Development Status Banner */}
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.35 }}
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-gradient-to-r from-orange-500/30 to-orange-600/30 border-2 border-orange-500/50 mb-8 shadow-xl shadow-orange-500/20"
+            >
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                className="w-6 h-6 border-3 border-white border-t-transparent rounded-full flex-shrink-0"
+                style={{ borderWidth: '3px' }}
+              />
+              <span className="text-white font-bold text-lg md:text-xl tracking-wide">
+                GELİŞTİRME AŞAMASINDA
+              </span>
             </motion.div>
 
             {/* Main Heading */}

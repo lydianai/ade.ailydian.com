@@ -29,11 +29,10 @@ export default function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed left-0 right-0 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 transition-all duration-300 ${
         isScrolled ? 'glass-card py-3' : 'bg-transparent py-5'
       }`}
       style={{
-        top: '40px',
         zIndex: 100,
         pointerEvents: 'auto'
       }}
