@@ -29,9 +29,10 @@ export default function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-12 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled ? 'glass-card py-3' : 'bg-transparent py-5'
       }`}
+      style={{ marginTop: '0px' }}
     >
       <div className="container-custom">
         <div className="flex items-center justify-between">

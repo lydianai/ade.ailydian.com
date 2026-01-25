@@ -40,8 +40,5 @@
         }
       ]
     }
-  ],
-  "env": {
-    "VITE_API_URL": "@ade_api_url"
-  }
+  ]
 }
