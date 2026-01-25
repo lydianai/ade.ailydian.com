@@ -19,7 +19,7 @@ import Header from '../components/Header'
 import Footer from '../components/Footer'
 
 export default function AnaSayfa() {
-  // ✅ İlk render'da full text göster
+  // ✅ İlk render'da full text göster - Cache Bust: 1769352347
   const [devText, setDevText] = useState('GELİŞTİRME AŞAMASINDA')
   const [isClient, setIsClient] = useState(false)
 
