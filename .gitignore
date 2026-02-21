@@ -83,3 +83,7 @@ public/uploads/
 # Backup files
 *.bak
 *.backup
+.env.*
+!.env.example
+.vercel/
+.turbo/

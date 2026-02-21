@@ -1,0 +1,215 @@
+<style>
+  #ade-dev-banner {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.95), rgba(20, 184, 166, 0.95));
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 2px solid rgba(245, 158, 11, 0.4);
+    box-shadow: 0 8px 32px rgba(245, 158, 11, 0.3),
+                0 4px 16px rgba(20, 184, 166, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    animation: gentle-pulse 3s ease-in-out infinite;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #ade-dev-banner:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 12px 40px rgba(245, 158, 11, 0.4),
+                0 6px 20px rgba(20, 184, 166, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  @keyframes gentle-pulse {
+    0%, 100% { opacity: 0.98; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 99% { opacity: 0; }
+  }
+
+  #ade-dev-banner .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2.5px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
+    flex-shrink: 0;
+  }
+
+  #ade-dev-banner .text {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3),
+                 0 1px 2px rgba(0, 0, 0, 0.2);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    white-space: nowrap;
+  }
+
+  #ade-dev-banner .cursor {
+    display: inline-block;
+    margin-left: 3px;
+    color: #ffffff;
+    font-weight: 400;
+    animation: blink 1s step-end infinite;
+  }
+
+  /* Desktop Large (1920px+) */
+  @media (min-width: 1920px) {
+    #ade-dev-banner {
+      padding: 12px 24px;
+      gap: 12px;
+    }
+    #ade-dev-banner .text {
+      font-size: 15px;
+    }
+    #ade-dev-banner .spinner {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  /* Desktop (1440px - 1919px) */
+  @media (max-width: 1919px) and (min-width: 1440px) {
+    #ade-dev-banner {
+      padding: 11px 22px;
+    }
+  }
+
+  /* Tablet Large (1024px - 1439px) */
+  @media (max-width: 1439px) and (min-width: 1024px) {
+    #ade-dev-banner {
+      top: 18px;
+      padding: 10px 20px;
+      gap: 9px;
+    }
+    #ade-dev-banner .text {
+      font-size: 13px;
+    }
+  }
+
+  /* Tablet (768px - 1023px) */
+  @media (max-width: 1023px) and (min-width: 768px) {
+    #ade-dev-banner {
+      top: 16px;
+      padding: 9px 18px;
+      gap: 8px;
+      border-radius: 11px;
+    }
+    #ade-dev-banner .text {
+      font-size: 12px;
+      letter-spacing: 0.07em;
+    }
+    #ade-dev-banner .spinner {
+      width: 16px;
+      height: 16px;
+      border-width: 2.5px;
+    }
+  }
+
+  /* Mobile Large (640px - 767px) */
+  @media (max-width: 767px) and (min-width: 640px) {
+    #ade-dev-banner {
+      top: 14px;
+      padding: 8px 16px;
+      gap: 7px;
+      border-radius: 10px;
+      max-width: calc(100vw - 40px);
+    }
+    #ade-dev-banner .text {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+    #ade-dev-banner .spinner {
+      width: 15px;
+      height: 15px;
+      border-width: 2px;
+    }
+  }
+
+  /* Mobile (480px - 639px) */
+  @media (max-width: 639px) and (min-width: 480px) {
+    #ade-dev-banner {
+      top: 12px;
+      padding: 7px 14px;
+      gap: 6px;
+      border-radius: 9px;
+      max-width: calc(100vw - 32px);
+    }
+    #ade-dev-banner .text {
+      font-size: 10px;
+      letter-spacing: 0.05em;
+    }
+    #ade-dev-banner .spinner {
+      width: 14px;
+      height: 14px;
+      border-width: 2px;
+    }
+  }
+
+  /* Mobile Small (380px - 479px) */
+  @media (max-width: 479px) and (min-width: 380px) {
+    #ade-dev-banner {
+      top: 10px;
+      padding: 6px 12px;
+      gap: 5px;
+      border-radius: 8px;
+      max-width: calc(100vw - 24px);
+    }
+    #ade-dev-banner .text {
+      font-size: 9px;
+      letter-spacing: 0.04em;
+    }
+    #ade-dev-banner .spinner {
+      width: 12px;
+      height: 12px;
+      border-width: 2px;
+    }
+  }
+
+  /* Mobile Extra Small (<380px) */
+  @media (max-width: 379px) {
+    #ade-dev-banner {
+      top: 8px;
+      padding: 5px 10px;
+      gap: 4px;
+      border-radius: 7px;
+      max-width: calc(100vw - 20px);
+    }
+    #ade-dev-banner .text {
+      font-size: 8px;
+      letter-spacing: 0.03em;
+    }
+    #ade-dev-banner .spinner {
+      width: 10px;
+      height: 10px;
+      border-width: 1.5px;
+    }
+  }
+</style>
+<div id="ade-dev-banner">
+  <div class="spinner"></div>
+  <span class="text">
+    GELİŞTİRME AŞAMASINDA
+    <span class="cursor">█</span>
+  </span>
+</div>

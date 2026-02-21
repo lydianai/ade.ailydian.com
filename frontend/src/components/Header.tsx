@@ -73,15 +73,20 @@ export default function Header() {
               <>
                 <button
                   onClick={() => {
-                    if (import.meta.env.DEV) {
-                      console.log('🎯 Demo İncele clicked')
-                    }
+                    console.log('🎯 Paneli İncele clicked - Demo login starting...')
                     demoGiris()
-                    navigate('/panel')
+                    setTimeout(() => {
+                      console.log('✅ Navigating to panel...')
+                      navigate('/panel')
+                    }, 100)
                   }}
-                  className="btn-primary"
+                  className="btn-primary relative overflow-hidden group"
                 >
-                  🎯 Demo İncele
+                  <span className="relative z-10 flex items-center gap-2">
+                    🎯 Paneli İncele
+                    <span className="text-xs opacity-70">(Demo)</span>
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-amber-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
                 <Link to="/giris-yap" className="btn-ghost">
                   Giriş Yap

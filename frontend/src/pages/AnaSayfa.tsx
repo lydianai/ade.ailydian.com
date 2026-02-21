@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import {
   SparklesIcon,
@@ -17,10 +17,12 @@ import {
 } from '@heroicons/react/24/outline'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
+import { useAuthStore } from '../contexts/useAuthStore'
 
 export default function AnaSayfa() {
-  // ✅ STATIK TEXT - Her zaman görünür, animation yok!
-  const devText = 'GELİŞTİRME AŞAMASINDA'
+  const navigate = useNavigate()
+  const { demoGiris } = useAuthStore()
+
   const features = [
     {
       icon: CpuChipIcon,
@@ -249,34 +251,25 @@ export default function AnaSayfa() {
 
             {/* DEVELOPMENT BANNER + PANEL BUTTON */}
             <div className="flex flex-col items-center gap-6 my-12">
-              {/* Development Banner */}
-              <div className="inline-flex items-center gap-4 px-8 py-6 rounded-2xl bg-gradient-to-r from-orange-600 via-red-600 to-orange-600 border-4 border-yellow-400 shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse">
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: 'linear' }}
-                  className="w-10 h-10 border-4 border-yellow-300 border-t-transparent rounded-full flex-shrink-0"
-                />
-                <span className="text-yellow-100 font-black text-3xl md:text-5xl tracking-wider uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)]">
-                  {devText}
-                  <motion.span
-                    animate={{ opacity: [1, 0, 1] }}
-                    transition={{ duration: 0.6, repeat: Infinity, ease: 'linear' }}
-                    className="inline-block ml-1 text-yellow-300"
-                  >
-                    █
-                  </motion.span>
-                </span>
-              </div>
+              {/* Development Banner - DOM Injection Mount Point */}
+              <div id="dev-banner-mount-point"></div>
 
-              {/* Panel Access Button */}
-              <Link
-                to="/panel"
+              {/* Panel Access Button - Auto Demo Login */}
+              <button
+                onClick={() => {
+                  console.log('🎯 DEMO GİRİŞ: Paneli İncele butonuna tıklandı')
+                  demoGiris()
+                  setTimeout(() => {
+                    console.log('✅ DEMO GİRİŞ: Panele yönlendiriliyor...')
+                    navigate('/panel')
+                  }, 100)
+                }}
                 className="btn-primary text-xl px-12 py-6 inline-flex items-center gap-3 shadow-2xl shadow-amber-500/30 hover:shadow-amber-500/50 transform hover:scale-105 transition-all"
               >
                 <span>🎯</span>
                 <span className="font-bold">Paneli İncele (Giriş Gerektirmez)</span>
                 <ArrowRightIcon className="w-6 h-6" />
-              </Link>
+              </button>
             </div>
 
             {/* Stats */}

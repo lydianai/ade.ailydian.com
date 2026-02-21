@@ -156,6 +156,186 @@
     </script>
   </head>
   <body>
+    <!-- Development Banner Loader - Load Immediately -->
+    <script>
+      // Banner'ı HEMEN yükle, React beklemeden
+      (function() {
+        fetch('/dev-banner.html')
+          .then(r => r.text())
+          .then(html => {
+            const div = document.createElement('div');
+            div.innerHTML = html;
+            document.body.appendChild(div);
+          })
+          .catch(err => console.error('Banner yüklenemedi:', err));
+      })();
+    </script>
+
+    <!-- Demo Button - Inline Implementation (Scripts in innerHTML don't execute!) -->
+    <script>
+      (function() {
+        'use strict';
+
+        console.log('🔄 DEMO BUTTON: Initializing...');
+
+        // Create styles
+        const style = document.createElement('style');
+        style.textContent = `
+          #ade-demo-button-wrapper {
+            position: fixed;
+            bottom: 32px;
+            right: 32px;
+            z-index: 9998;
+            animation: ade-slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+          }
+          @keyframes ade-slideIn {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+          }
+          #ade-demo-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 16px 28px;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #F59E0B 0%, #14B8A6 100%);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px -12px rgba(245, 158, 11, 0.4), 0 4px 20px 0 rgba(20, 184, 166, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            white-space: nowrap;
+          }
+          #ade-demo-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px -12px rgba(245, 158, 11, 0.5), 0 8px 30px 0 rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          }
+          #ade-demo-button:active {
+            transform: translateY(-1px);
+          }
+          .demo-icon {
+            width: 16px;
+            height: 16px;
+            border: 2px solid currentColor;
+            border-radius: 4px;
+            position: relative;
+            flex-shrink: 0;
+          }
+          .demo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
+            height: 6px;
+            background: currentColor;
+            border-radius: 1px;
+          }
+
+          /* Desktop Large (1920px+) */
+          @media (min-width: 1920px) {
+            #ade-demo-button-wrapper { bottom: 40px; right: 40px; }
+            #ade-demo-button { padding: 18px 32px; font-size: 16px; gap: 10px; }
+            .demo-icon { width: 18px; height: 18px; }
+            .demo-icon::after { width: 7px; height: 7px; }
+          }
+
+          /* Desktop (1440px - 1919px) */
+          @media (max-width: 1919px) and (min-width: 1440px) {
+            #ade-demo-button-wrapper { bottom: 36px; right: 36px; }
+            #ade-demo-button { padding: 17px 30px; }
+          }
+
+          /* Tablet Large (1024px - 1439px) */
+          @media (max-width: 1439px) and (min-width: 1024px) {
+            #ade-demo-button-wrapper { bottom: 32px; right: 32px; }
+            #ade-demo-button { padding: 15px 26px; font-size: 14px; }
+          }
+
+          /* Tablet (768px - 1023px) */
+          @media (max-width: 1023px) and (min-width: 768px) {
+            #ade-demo-button-wrapper { bottom: 24px; right: 24px; }
+            #ade-demo-button { padding: 14px 24px; font-size: 14px; gap: 7px; border-radius: 11px; }
+            .demo-icon { width: 15px; height: 15px; border-width: 1.5px; }
+            .demo-icon::after { width: 5px; height: 5px; }
+          }
+
+          /* Mobile Large (640px - 767px) */
+          @media (max-width: 767px) and (min-width: 640px) {
+            #ade-demo-button-wrapper { bottom: 20px; right: 20px; left: 20px; }
+            #ade-demo-button { width: 100%; padding: 13px 22px; font-size: 13px; gap: 6px; border-radius: 10px; }
+            .demo-icon { width: 14px; height: 14px; border-width: 1.5px; }
+          }
+
+          /* Mobile (480px - 639px) */
+          @media (max-width: 639px) and (min-width: 480px) {
+            #ade-demo-button-wrapper { bottom: 16px; right: 16px; left: 16px; }
+            #ade-demo-button { width: 100%; padding: 12px 20px; font-size: 13px; gap: 6px; border-radius: 10px; }
+            .demo-icon { width: 14px; height: 14px; }
+          }
+
+          /* Mobile Small (380px - 479px) */
+          @media (max-width: 479px) and (min-width: 380px) {
+            #ade-demo-button-wrapper { bottom: 14px; right: 14px; left: 14px; }
+            #ade-demo-button { width: 100%; padding: 11px 18px; font-size: 12px; gap: 5px; border-radius: 9px; }
+            .demo-icon { width: 13px; height: 13px; }
+            .demo-icon::after { width: 4px; height: 4px; }
+          }
+
+          /* Mobile Extra Small (<380px) */
+          @media (max-width: 379px) {
+            #ade-demo-button-wrapper { bottom: 12px; right: 12px; left: 12px; }
+            #ade-demo-button { width: 100%; padding: 10px 16px; font-size: 11px; gap: 4px; border-radius: 8px; }
+            .demo-icon { width: 12px; height: 12px; border-width: 1.5px; }
+            .demo-icon::after { width: 4px; height: 4px; }
+          }
+        `;
+        document.head.appendChild(style);
+
+        // Create button HTML
+        const wrapper = document.createElement('div');
+        wrapper.id = 'ade-demo-button-wrapper';
+        wrapper.innerHTML = '<button id="ade-demo-button" type="button"><div class="demo-icon"></div><span>Demo Paneli İncele</span></button>';
+        document.body.appendChild(wrapper);
+
+        // Attach click handler
+        const button = document.getElementById('ade-demo-button');
+        if (button) {
+          button.onclick = function(e) {
+            e.preventDefault();
+            console.log('🎯 DEMO: Login starting...');
+
+            const demoUser = {
+              id: 'demo-user-' + Date.now(),
+              email: 'demo@ade.gov.tr',
+              ad: 'Demo',
+              soyad: 'Kullanıcı',
+              rol: 'demo',
+              telefon: '+90 555 000 0000'
+            };
+
+            try {
+              localStorage.setItem('accessToken', 'demo-token-' + Date.now());
+              localStorage.setItem('refreshToken', 'demo-token-' + Date.now());
+              localStorage.setItem('user', JSON.stringify(demoUser));
+              localStorage.setItem('demoMode', 'true');
+              console.log('✅ DEMO: LocalStorage updated');
+              setTimeout(function() { window.location.href = '/panel'; }, 100);
+            } catch (err) {
+              console.error('❌ DEMO: Error -', err);
+              alert('Demo giriş başarısız.');
+            }
+          };
+          console.log('✅ DEMO BUTTON: Ready!');
+        }
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

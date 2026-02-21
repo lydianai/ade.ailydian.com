@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import { EyeIcon, EyeSlashIcon, EnvelopeIcon, LockClosedIcon } from '@heroicons/react/24/outline'
@@ -6,9 +6,20 @@ import { useAuthStore } from '../contexts/useAuthStore'
 
 export default function GirisYap() {
   const navigate = useNavigate()
-  const { girisYap, demoGiris, loading, error, clearError } = useAuthStore()
+  const { girisYap, demoGiris, loading, error, clearError, isAuthenticated } = useAuthStore()
   const [showPassword, setShowPassword] = useState(false)
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  // Demo kullanıcı bilgileri otomatik dolu
+  const [formData, setFormData] = useState({
+    email: 'demo@ade.gov.tr',
+    password: 'demo123'
+  })
+
+  // Zaten giriş yapılmışsa panele yönlendir
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/panel')
+    }
+  }, [isAuthenticated, navigate])
 
   const handleDemoLogin = async () => {
     // Demo kullanıcı bilgilerini otomatik doldur
@@ -28,13 +39,26 @@ export default function GirisYap() {
     e.preventDefault()
     clearError()
 
+    console.log('🔐 Form submit:', formData)
+
     try {
-      // Backend uses Turkish field names (sifre not password)
-      await girisYap(formData.email, formData.password)
-      navigate('/panel')
+      // Demo kullanıcı için direkt demoGiris kullan
+      if (formData.email === 'demo@ade.gov.tr' || formData.email.includes('demo')) {
+        console.log('✅ Demo login detected, using demoGiris()')
+        demoGiris()
+        // Navigate after a short delay to ensure state is updated
+        setTimeout(() => {
+          navigate('/panel')
+        }, 100)
+      } else {
+        console.log('🔑 Real login, calling backend')
+        // Backend uses Turkish field names (sifre not password)
+        await girisYap(formData.email, formData.password)
+        navigate('/panel')
+      }
     } catch (err) {
       // Error is already handled in the store
-      console.error('Login error:', err)
+      console.error('❌ Login error:', err)
     }
   }
 

@@ -1,0 +1,199 @@
+<style>
+  #ade-demo-button-wrapper {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 9998;
+    animation: ade-slideIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes ade-slideIn {
+    from {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  #ade-demo-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(135deg, #F59E0B 0%, #14B8A6 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow:
+      0 10px 40px -12px rgba(245, 158, 11, 0.4),
+      0 4px 20px 0 rgba(20, 184, 166, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    letter-spacing: 0.3px;
+  }
+
+  #ade-demo-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s;
+  }
+
+  #ade-demo-button:hover::before {
+    left: 100%;
+  }
+
+  #ade-demo-button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 15px 50px -12px rgba(245, 158, 11, 0.5),
+      0 8px 30px 0 rgba(20, 184, 166, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  #ade-demo-button:active {
+    transform: translateY(-1px);
+  }
+
+  .demo-icon {
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .demo-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: currentColor;
+    border-radius: 1px;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    #ade-demo-button-wrapper {
+      bottom: 20px;
+      right: 20px;
+      left: 20px;
+    }
+
+    #ade-demo-button {
+      width: 100%;
+      justify-content: center;
+      padding: 14px 24px;
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #ade-demo-button {
+      padding: 12px 20px;
+      font-size: 13px;
+      gap: 6px;
+    }
+  }
+</style>
+
+<div id="ade-demo-button-wrapper">
+  <button id="ade-demo-button" type="button">
+    <div class="demo-icon"></div>
+    <span>Demo Paneli İncele</span>
+  </button>
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  console.log('🔄 DEMO BUTTON: Script loaded');
+
+  function performDemoLogin() {
+    console.log('🎯 DEMO BUTTON: Starting demo login...');
+
+    const demoUser = {
+      id: 'demo-user-' + Date.now(),
+      email: 'demo@ade.gov.tr',
+      ad: 'Demo',
+      soyad: 'Kullanıcı',
+      rol: 'demo',
+      telefon: '+90 555 000 0000',
+    };
+
+    const demoToken = 'demo-token-' + Date.now();
+
+    try {
+      localStorage.setItem('accessToken', demoToken);
+      localStorage.setItem('refreshToken', demoToken);
+      localStorage.setItem('user', JSON.stringify(demoUser));
+      localStorage.setItem('demoMode', 'true');
+      console.log('✅ DEMO BUTTON: LocalStorage updated');
+    } catch (error) {
+      console.error('❌ DEMO BUTTON: LocalStorage error:', error);
+      alert('Demo giriş başarısız. Lütfen tarayıcınızın localStorage iznini kontrol edin.');
+      return;
+    }
+
+    console.log('🚀 DEMO BUTTON: Redirecting to /panel...');
+    window.location.href = '/panel';
+  }
+
+  function attachClickHandler() {
+    const button = document.getElementById('ade-demo-button');
+
+    if (!button) {
+      console.error('❌ DEMO BUTTON: Button not found in DOM!');
+      return;
+    }
+
+    console.log('✅ DEMO BUTTON: Button found, attaching handler...');
+
+    button.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('🖱️ DEMO BUTTON: Button clicked!');
+      performDemoLogin();
+    };
+
+    console.log('✅ DEMO BUTTON: Click handler attached successfully');
+  }
+
+  // Try multiple initialization strategies
+  if (document.readyState === 'loading') {
+    console.log('⏳ DEMO BUTTON: Waiting for DOMContentLoaded...');
+    document.addEventListener('DOMContentLoaded', attachClickHandler);
+  } else {
+    console.log('✨ DEMO BUTTON: DOM already loaded, initializing now...');
+    attachClickHandler();
+  }
+
+  // Fallback: try again after a short delay
+  setTimeout(function() {
+    const button = document.getElementById('ade-demo-button');
+    if (button && !button.onclick) {
+      console.log('🔁 DEMO BUTTON: Fallback initialization...');
+      attachClickHandler();
+    }
+  }, 500);
+})();
+</script>
