@@ -41,7 +41,7 @@
 
 ### ✅ 2. iOS API Client Implementation (TAMAMLANDI)
 
-**Dosya:** `/Users/sardag/Desktop/ADE/mobile/ios/ADE/Core/Network/APIClient.swift`
+**Dosya:** `/Users/lydian/Desktop/ADE/mobile/ios/ADE/Core/Network/APIClient.swift`
 **Boyut:** 11.5KB
 **Satır:** 450+ satır
 
@@ -60,7 +60,7 @@
 - [x] Turkish error messages
 - [x] Network connectivity monitoring ready
 
-**API Models:** `/Users/sardag/Desktop/ADE/mobile/ios/ADE/Data/Models/APIModels.swift`
+**API Models:** `/Users/lydian/Desktop/ADE/mobile/ios/ADE/Data/Models/APIModels.swift`
 **Boyut:** 9.2KB
 **Models:** 40+ Codable structs (User, Integration, Order, Product, Invoice, etc.)
 
@@ -68,7 +68,7 @@
 
 ### ✅ 3. Android API Client Implementation (TAMAMLANDI)
 
-**Dosya:** `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/APIClient.kt`
+**Dosya:** `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/APIClient.kt`
 **Boyut:** 10.8KB
 **Satır:** 420+ satır
 
@@ -86,7 +86,7 @@
 - [x] Turkish error messages
 - [x] Network error handling
 
-**API Models:** `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/data/model/APIModels.kt`
+**API Models:** `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/data/model/APIModels.kt`
 **Boyut:** 11.2KB
 **Models:** 45+ data classes with @SerializedName annotations
 
@@ -149,7 +149,7 @@
 
 ### ✅ 5. Xcode Project Setup Guide (TAMAMLANDI)
 
-**Dosya:** `/Users/sardag/Desktop/ADE/mobile/XCODE_PROJECT_SETUP.md`
+**Dosya:** `/Users/lydian/Desktop/ADE/mobile/XCODE_PROJECT_SETUP.md`
 **Boyut:** 14.2KB
 
 **İçerik:**
@@ -175,7 +175,7 @@
 
 ### ✅ 6. Android Studio Project Setup Guide (TAMAMLANDI)
 
-**Dosya:** `/Users/sardag/Desktop/ADE/mobile/ANDROID_STUDIO_PROJECT_SETUP.md`
+**Dosya:** `/Users/lydian/Desktop/ADE/mobile/ANDROID_STUDIO_PROJECT_SETUP.md`
 **Boyut:** 16.8KB
 
 **İçerik:**
@@ -392,7 +392,7 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
 
 ### iOS (5 dosya + 11 icons)
 ```
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/
 ├── Core/Network/
 │   └── APIClient.swift                    (11.5KB) ✅ YENİ
 ├── Data/Models/
@@ -401,7 +401,7 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
     ├── DashboardView.swift                (8.7KB)  ✅ YENİ
     └── DashboardViewModel.swift           (2.4KB)  ✅ YENİ
 
-/Users/sardag/Desktop/ADE/mobile/assets/ios/
+/Users/lydian/Desktop/ADE/mobile/assets/ios/
 ├── app-icon-40.png    (2.5KB)             ✅ YENİ
 ├── app-icon-58.png    (3.7KB)             ✅ YENİ
 ├── app-icon-60.png    (3.7KB)             ✅ YENİ
@@ -417,7 +417,7 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
 
 ### Android (5 dosya + 6 icons)
 ```
-/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/
+/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/
 ├── core/network/
 │   └── APIClient.kt                       (10.8KB) ✅ YENİ
 ├── data/model/
@@ -426,7 +426,7 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
     ├── DashboardScreen.kt                 (12.5KB) ✅ YENİ
     └── DashboardViewModel.kt              (3.2KB)  ✅ YENİ
 
-/Users/sardag/Desktop/ADE/mobile/assets/android/
+/Users/lydian/Desktop/ADE/mobile/assets/android/
 ├── mipmap-mdpi/ic_launcher.png            (2.8KB)  ✅ YENİ
 ├── mipmap-hdpi/ic_launcher.png            (3.9KB)  ✅ YENİ
 ├── mipmap-xhdpi/ic_launcher.png           (5.3KB)  ✅ YENİ
@@ -437,7 +437,7 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
 
 ### Documentation (3 dosya)
 ```
-/Users/sardag/Desktop/ADE/mobile/
+/Users/lydian/Desktop/ADE/mobile/
 ├── XCODE_PROJECT_SETUP.md                 (14.2KB) ✅ YENİ
 ├── ANDROID_STUDIO_PROJECT_SETUP.md        (16.8KB) ✅ YENİ
 └── NEXT_STEPS_COMPLETED.md                (Bu dosya) ✅ YENİ
@@ -449,14 +449,14 @@ TOPLAM İLERLEME: 80% → 82% (+2%)
 
 ## 💾 KAYDETME KONTROLÜ
 
-Tüm dosyalar `/Users/sardag/Desktop/ADE/` klasörüne kaydedildi:
+Tüm dosyalar `/Users/lydian/Desktop/ADE/` klasörüne kaydedildi:
 
 ```bash
 # Kontrol et
-ls -lh /Users/sardag/Desktop/ADE/mobile/ios/ADE/Core/Network/
-ls -lh /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/
-ls -lh /Users/sardag/Desktop/ADE/mobile/assets/ios/
-ls -lh /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-*/
+ls -lh /Users/lydian/Desktop/ADE/mobile/ios/ADE/Core/Network/
+ls -lh /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/
+ls -lh /Users/lydian/Desktop/ADE/mobile/assets/ios/
+ls -lh /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-*/
 ```
 
 **Sonuç:** ✅ TÜM DOSYALAR BAŞARIYLA KAYDEDİLDİ
@@ -513,17 +513,17 @@ ls -lh /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-*/
 ## 📞 DESTEK & KAYNAKLAR
 
 ### Dokümantasyon:
-- **Mobile Implementation:** `/Users/sardag/Desktop/ADE/mobile/IMPLEMENTATION_COMPLETE.md`
-- **Xcode Setup:** `/Users/sardag/Desktop/ADE/mobile/XCODE_PROJECT_SETUP.md`
-- **Android Setup:** `/Users/sardag/Desktop/ADE/mobile/ANDROID_STUDIO_PROJECT_SETUP.md`
-- **Project Status:** `/Users/sardag/Desktop/ADE/FINAL_PROJECT_STATUS.md`
+- **Mobile Implementation:** `/Users/lydian/Desktop/ADE/mobile/IMPLEMENTATION_COMPLETE.md`
+- **Xcode Setup:** `/Users/lydian/Desktop/ADE/mobile/XCODE_PROJECT_SETUP.md`
+- **Android Setup:** `/Users/lydian/Desktop/ADE/mobile/ANDROID_STUDIO_PROJECT_SETUP.md`
+- **Project Status:** `/Users/lydian/Desktop/ADE/FINAL_PROJECT_STATUS.md`
 
 ### Proje Lokasyonu:
-- **Root:** `/Users/sardag/Desktop/ADE/`
-- **iOS:** `/Users/sardag/Desktop/ADE/mobile/ios/`
-- **Android:** `/Users/sardag/Desktop/ADE/mobile/android/`
-- **Frontend:** `/Users/sardag/Desktop/ADE/frontend/`
-- **Backend:** `/Users/sardag/Desktop/ADE/backend/`
+- **Root:** `/Users/lydian/Desktop/ADE/`
+- **iOS:** `/Users/lydian/Desktop/ADE/mobile/ios/`
+- **Android:** `/Users/lydian/Desktop/ADE/mobile/android/`
+- **Frontend:** `/Users/lydian/Desktop/ADE/frontend/`
+- **Backend:** `/Users/lydian/Desktop/ADE/backend/`
 
 ---
 

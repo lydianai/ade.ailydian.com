@@ -53,7 +53,7 @@ play-store → 512x512px (Google Play Store)
 brew install imagemagick librsvg
 
 # iOS Icon Generation
-cd /Users/sardag/Desktop/ADE/mobile/assets
+cd /Users/lydian/Desktop/ADE/mobile/assets
 
 # Convert SVG to PNG (master 1024x1024)
 convert -background none -resize 1024x1024 app-icon.svg ios/Icon-1024.png

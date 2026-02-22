@@ -50,7 +50,7 @@ xcode-select --print-path
 ### Adım 1: Xcode'u Açın
 
 ```bash
-cd /Users/sardag/Desktop/ADE/mobile/ios
+cd /Users/lydian/Desktop/ADE/mobile/ios
 open -a Xcode
 ```
 
@@ -71,7 +71,7 @@ open -a Xcode
 **Storage:** None (manuel Core Data ekleyeceğiz)
 **Include Tests:** ✅ Seçili
 
-**Location:** `/Users/sardag/Desktop/ADE/mobile/ios`
+**Location:** `/Users/lydian/Desktop/ADE/mobile/ios`
 
 ### Adım 4: Dosya Yapısını Oluşturun
 
@@ -116,13 +116,13 @@ ADE/
 3. Aşağıdaki dosyaları seçin (⌘+Click ile çoklu seçim):
 
 ```bash
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/ADEApp.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Core/Authentication/AuthenticationManager.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Core/Security/KeychainManager.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Core/Network/APIClient.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Data/Models/APIModels.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Features/Dashboard/DashboardView.swift
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Features/Dashboard/DashboardViewModel.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/ADEApp.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Core/Authentication/AuthenticationManager.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Core/Security/KeychainManager.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Core/Network/APIClient.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Data/Models/APIModels.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Features/Dashboard/DashboardView.swift
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Features/Dashboard/DashboardViewModel.swift
 ```
 
 4. **Options:**
@@ -286,7 +286,7 @@ Project Navigator > **Info.plist** > **Open As > Source Code**
 
 ### Adım 2: Icon'ları Ekleyin
 
-Icon'lar `/Users/sardag/Desktop/ADE/mobile/assets/ios/` klasöründe hazır:
+Icon'lar `/Users/lydian/Desktop/ADE/mobile/assets/ios/` klasöründe hazır:
 
 | Boyut | Dosya | Hedef |
 |-------|-------|-------|
@@ -310,8 +310,8 @@ Her boyutu Assets Catalog'daki ilgili slot'a sürükleyin.
 
 ```bash
 # Assets.xcassets klasörüne icon'ları kopyala
-cp /Users/sardag/Desktop/ADE/mobile/assets/ios/*.png \
-   /Users/sardag/Desktop/ADE/mobile/ios/ADE/Assets.xcassets/AppIcon.appiconset/
+cp /Users/lydian/Desktop/ADE/mobile/assets/ios/*.png \
+   /Users/lydian/Desktop/ADE/mobile/ios/ADE/Assets.xcassets/AppIcon.appiconset/
 ```
 
 ---
@@ -376,7 +376,7 @@ cp /Users/sardag/Desktop/ADE/mobile/assets/ios/*.png \
 
 ```bash
 # Komut satırından (opsiyonel)
-cd /Users/sardag/Desktop/ADE/mobile/ios
+cd /Users/lydian/Desktop/ADE/mobile/ios
 xcodebuild -project ADE.xcodeproj -scheme ADE -destination 'platform=iOS Simulator,name=iPhone 15 Pro' build
 
 # Veya Xcode'da
@@ -387,7 +387,7 @@ xcodebuild -project ADE.xcodeproj -scheme ADE -destination 'platform=iOS Simulat
 
 ```bash
 # Terminal 1: Backend (NestJS)
-cd /Users/sardag/Desktop/ADE/backend
+cd /Users/lydian/Desktop/ADE/backend
 pnpm run start:dev
 
 # Backend: http://localhost:3000
@@ -500,8 +500,8 @@ Proje oluşturduktan sonra kontrol edin:
 
 Sorun yaşarsanız:
 
-- **Dokümantasyon:** `/Users/sardag/Desktop/ADE/mobile/IMPLEMENTATION_COMPLETE.md`
-- **Proje Durumu:** `/Users/sardag/Desktop/ADE/FINAL_PROJECT_STATUS.md`
+- **Dokümantasyon:** `/Users/lydian/Desktop/ADE/mobile/IMPLEMENTATION_COMPLETE.md`
+- **Proje Durumu:** `/Users/lydian/Desktop/ADE/FINAL_PROJECT_STATUS.md`
 - **GitHub Issues:** (Eğer varsa)
 
 ---

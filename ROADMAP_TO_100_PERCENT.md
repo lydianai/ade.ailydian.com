@@ -555,7 +555,7 @@ Müşteri: Ahmet Yılmaz
 #### **Video Tutorials & Help Center**
 **Dosyalar:**
 ```
-/Users/sardag/Desktop/ADE/frontend/public/tutorials/
+/Users/lydian/Desktop/ADE/frontend/public/tutorials/
 ├── 01-getting-started.mp4
 ├── 02-integrations.mp4
 ├── 03-orders-management.mp4

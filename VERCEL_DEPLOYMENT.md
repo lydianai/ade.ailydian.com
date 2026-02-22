@@ -34,7 +34,7 @@
 #### A) Vercel CLI ile Deploy
 
 ```bash
-cd /Users/sardag/Desktop/ADE/frontend
+cd /Users/lydian/Desktop/ADE/frontend
 
 # Vercel CLI yükle (eğer yoksa)
 npm install -g vercel
@@ -98,7 +98,7 @@ postgresql://[user]:[password]@[endpoint]/[database]?sslmode=require
 #### B) Backend Deploy
 
 ```bash
-cd /Users/sardag/Desktop/ADE/backend
+cd /Users/lydian/Desktop/ADE/backend
 
 # Prisma generate (production için)
 npx prisma generate
@@ -156,7 +156,7 @@ DATABASE_URL="postgresql://..." npx prisma db seed
 
 1. **GitHub Repo Oluştur**
 ```bash
-cd /Users/sardag/Desktop/ADE
+cd /Users/lydian/Desktop/ADE
 git init
 git add .
 git commit -m "Initial commit: ADE v1.0"

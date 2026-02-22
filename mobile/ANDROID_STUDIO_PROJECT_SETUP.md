@@ -78,7 +78,7 @@ open -a "Android Studio"
 |-------|-------|
 | **Name** | `ADE` |
 | **Package name** | `tr.gov.ade` |
-| **Save location** | `/Users/sardag/Desktop/ADE/mobile/android` |
+| **Save location** | `/Users/lydian/Desktop/ADE/mobile/android` |
 | **Language** | `Kotlin` |
 | **Minimum SDK** | `API 26 ("Oreo"; Android 8.0)` |
 | **Build configuration language** | `Kotlin DSL (build.gradle.kts)` |
@@ -143,21 +143,21 @@ app/src/main/
 
 ```bash
 # Dosya yapısını oluştur
-cd /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade
+cd /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade
 
 # Core files
 mkdir -p core/auth core/security core/network
-cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/auth/AuthenticationManager.kt core/auth/
-cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/APIClient.kt core/network/
+cp /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/auth/AuthenticationManager.kt core/auth/
+cp /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/network/APIClient.kt core/network/
 
 # Data models
 mkdir -p data/model
-cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/data/model/APIModels.kt data/model/
+cp /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/data/model/APIModels.kt data/model/
 
 # Features
 mkdir -p features/dashboard
-cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/dashboard/DashboardScreen.kt features/dashboard/
-cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/dashboard/DashboardViewModel.kt features/dashboard/
+cp /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/dashboard/DashboardScreen.kt features/dashboard/
+cp /Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/dashboard/DashboardViewModel.kt features/dashboard/
 ```
 
 ---
@@ -166,7 +166,7 @@ cp /Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/feature
 
 ### Adım 1: Project-level `build.gradle.kts`
 
-Dosya yolu: `/Users/sardag/Desktop/ADE/mobile/android/build.gradle.kts`
+Dosya yolu: `/Users/lydian/Desktop/ADE/mobile/android/build.gradle.kts`
 
 ```kotlin
 // Top-level build file
@@ -180,7 +180,7 @@ plugins {
 
 ### Adım 2: Module-level `build.gradle.kts`
 
-Dosya yolu: `/Users/sardag/Desktop/ADE/mobile/android/app/build.gradle.kts`
+Dosya yolu: `/Users/lydian/Desktop/ADE/mobile/android/app/build.gradle.kts`
 
 ```kotlin
 plugins {
@@ -334,7 +334,7 @@ kapt {
 File > Sync Project with Gradle Files
 
 # Veya Terminal'de
-cd /Users/sardag/Desktop/ADE/mobile/android
+cd /Users/lydian/Desktop/ADE/mobile/android
 ./gradlew build
 ```
 
@@ -342,7 +342,7 @@ cd /Users/sardag/Desktop/ADE/mobile/android
 
 ## ⚙️ AndroidManifest.xml Konfigürasyonu
 
-Dosya yolu: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/AndroidManifest.xml`
+Dosya yolu: `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/AndroidManifest.xml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -411,7 +411,7 @@ Dosya yolu: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/AndroidManife
 
 ### Network Security Config
 
-Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/res/xml/network_security_config.xml`
+Dosya: `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/res/xml/network_security_config.xml`
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -445,23 +445,23 @@ Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/res/xml/network_se
 
 ## 🎨 App Icon Ekleme
 
-Icon'lar `/Users/sardag/Desktop/ADE/mobile/assets/android/` klasöründe hazır.
+Icon'lar `/Users/lydian/Desktop/ADE/mobile/assets/android/` klasöründe hazır.
 
 ### Adım 1: Icon'ları Kopyalayın
 
 ```bash
 # res/mipmap klasörlerine kopyala
-cd /Users/sardag/Desktop/ADE/mobile/android/app/src/main/res
+cd /Users/lydian/Desktop/ADE/mobile/android/app/src/main/res
 
 # Her density için ic_launcher.png
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-mdpi/ic_launcher.png mipmap-mdpi/
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-hdpi/ic_launcher.png mipmap-hdpi/
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-xhdpi/ic_launcher.png mipmap-xhdpi/
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-xxhdpi/ic_launcher.png mipmap-xxhdpi/
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/mipmap-xxxhdpi/ic_launcher.png mipmap-xxxhdpi/
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-mdpi/ic_launcher.png mipmap-mdpi/
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-hdpi/ic_launcher.png mipmap-hdpi/
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-xhdpi/ic_launcher.png mipmap-xhdpi/
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-xxhdpi/ic_launcher.png mipmap-xxhdpi/
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/mipmap-xxxhdpi/ic_launcher.png mipmap-xxxhdpi/
 
 # Adaptive icon için (opsiyonel)
-cp /Users/sardag/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png mipmap-xxxhdpi/ic_launcher_round.png
+cp /Users/lydian/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png mipmap-xxxhdpi/ic_launcher_round.png
 ```
 
 ### Adım 2: Image Asset Studio (Opsiyonel)
@@ -469,7 +469,7 @@ cp /Users/sardag/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png mip
 1. **res** klasörüne sağ tık
 2. **New > Image Asset**
 3. **Icon Type:** Launcher Icons (Adaptive and Legacy)
-4. **Path:** `/Users/sardag/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png`
+4. **Path:** `/Users/lydian/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png`
 5. **Next** > **Finish**
 
 ---
@@ -478,7 +478,7 @@ cp /Users/sardag/Desktop/ADE/mobile/assets/android/ic_launcher_playstore.png mip
 
 ### Adım 1: Hilt Application Class
 
-Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/ADEApplication.kt`
+Dosya: `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/ADEApplication.kt`
 
 ```kotlin
 package tr.gov.ade
@@ -505,7 +505,7 @@ class ADEApplication : Application() {
 
 ### Adım 2: EncryptedPrefsManager
 
-Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/security/EncryptedPrefsManager.kt`
+Dosya: `/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/core/security/EncryptedPrefsManager.kt`
 
 ```kotlin
 package tr.gov.ade.core.security
@@ -569,7 +569,7 @@ class EncryptedPrefsManager @Inject constructor(
 
 ### Adım 3: ProGuard Rules
 
-Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/proguard-rules.pro`
+Dosya: `/Users/lydian/Desktop/ADE/mobile/android/app/proguard-rules.pro`
 
 ```proguard
 # Retrofit
@@ -602,7 +602,7 @@ Dosya: `/Users/sardag/Desktop/ADE/mobile/android/app/proguard-rules.pro`
 
 ```bash
 # Terminal 1: Backend (NestJS)
-cd /Users/sardag/Desktop/ADE/backend
+cd /Users/lydian/Desktop/ADE/backend
 pnpm run start:dev
 
 # Backend: http://localhost:3000
@@ -624,7 +624,7 @@ pnpm run start:dev
 Run > Run 'app' (Shift + F10)
 
 # Veya Terminal'de
-cd /Users/sardag/Desktop/ADE/mobile/android
+cd /Users/lydian/Desktop/ADE/mobile/android
 ./gradlew installDebug
 
 # Logları görmek için

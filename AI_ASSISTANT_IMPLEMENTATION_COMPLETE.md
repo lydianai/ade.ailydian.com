@@ -114,12 +114,12 @@
 
 ```
 iOS:
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Features/AIAssistant/
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Features/AIAssistant/
 ├── AIAssistantView.swift          (18.5KB, 720+ satır) ✅
 └── AIAssistantViewModel.swift     (7.8KB, 310+ satır)  ✅
 
 Android:
-/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/aiassistant/
+/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/aiassistant/
 ├── AIAssistantScreen.kt           (16.8KB, 680+ satır) ✅
 └── AIAssistantViewModel.kt        (6.5KB, 260+ satır)  ✅
 

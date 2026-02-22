@@ -113,12 +113,12 @@ Tüm temel mobile ekranlar hem iOS hem de Android için **tamamen tamamlandı**!
 
 ```
 iOS:
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Features/Profile/
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Features/Profile/
 ├── ProfileView.swift              (24.5KB, 940+ satır) ✅
 └── ProfileViewModel.swift         (9.2KB, 350+ satır)  ✅
 
 Android:
-/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/profile/
+/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/profile/
 ├── ProfileScreen.kt               (21.8KB, 880+ satır) ✅
 └── ProfileViewModel.kt            (8.5KB, 320+ satır)  ✅
 

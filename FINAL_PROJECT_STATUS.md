@@ -39,7 +39,7 @@
 
 ## 🌐 1. FRONTEND (WEB APPLICATION)
 
-**Klasör:** `/Users/sardag/Desktop/ADE/frontend/`
+**Klasör:** `/Users/lydian/Desktop/ADE/frontend/`
 **Status:** ✅ **ÇALIŞIYOR** (http://localhost:5173)
 
 ### Teknoloji Stack
@@ -156,7 +156,7 @@ AI Önerileri:
 
 ## 📱 2. MOBİL UYGULAMALAR
 
-**Klasör:** `/Users/sardag/Desktop/ADE/mobile/`
+**Klasör:** `/Users/lydian/Desktop/ADE/mobile/`
 **Status:** ✅ **XCODE & ANDROID STUDIO'DA AÇILMAYA HAZIR**
 
 ### 2.1 iOS Native App
@@ -299,7 +299,7 @@ Android (6 adet):
 
 ## 🔧 3. BACKEND API
 
-**Klasör:** `/Users/sardag/Desktop/ADE/backend/`
+**Klasör:** `/Users/lydian/Desktop/ADE/backend/`
 **Status:** ✅ **ÇALIŞIYOR** (http://localhost:3000)
 
 ### Teknoloji Stack
@@ -411,7 +411,7 @@ POST   /api/ai/analyze
 ## 📂 Proje Dosya Yapısı
 
 ```
-/Users/sardag/Desktop/ADE/
+/Users/lydian/Desktop/ADE/
 ├── frontend/                        ✅ Web App
 │   ├── src/
 │   │   ├── pages/                  40+ pages
@@ -779,7 +779,7 @@ Support Response:        < 1 hour
 ## 📞 İletişim & Destek
 
 **Proje Adı**: ADE (Akıllı Devlet Ekosistemi)
-**Klasör**: `/Users/sardag/Desktop/ADE/`
+**Klasör**: `/Users/lydian/Desktop/ADE/`
 **Email**: destek@ade.gov.tr
 **Telefon**: 0850 390 80 80
 **Website**: https://ade.gov.tr

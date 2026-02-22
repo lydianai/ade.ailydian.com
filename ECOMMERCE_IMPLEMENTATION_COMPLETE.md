@@ -106,12 +106,12 @@
 
 ```
 iOS:
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/Features/ECommerce/
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/Features/ECommerce/
 ├── ECommerceView.swift          (21.5KB, 850+ satır) ✅
 └── ECommerceViewModel.swift     (8.2KB, 320+ satır)  ✅
 
 Android:
-/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/ecommerce/
+/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/features/ecommerce/
 ├── ECommerceScreen.kt           (18.5KB, 750+ satır) ✅
 └── ECommerceViewModel.kt        (7.8KB, 310+ satır)  ✅
 

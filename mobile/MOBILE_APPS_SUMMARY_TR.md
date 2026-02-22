@@ -508,7 +508,7 @@ App Size:        ~60 MB (estimated)
 
 ### 1. Icon'ları Oluştur
 ```bash
-cd /Users/sardag/Desktop/ADE/mobile/assets
+cd /Users/lydian/Desktop/ADE/mobile/assets
 
 # ImageMagick ile PNG'lere çevir
 brew install imagemagick librsvg

@@ -4,7 +4,7 @@
 
 ### 1. Start Development Server
 ```bash
-cd /Users/sardag/Desktop/ADE/frontend
+cd /Users/lydian/Desktop/ADE/frontend
 npm run dev
 ```
 **URL**: http://localhost:5173
@@ -68,7 +68,7 @@ http://localhost:5173/panel
 
 ### Start Backend (Separate Terminal)
 ```bash
-cd /Users/sardag/Desktop/ADE/backend
+cd /Users/lydian/Desktop/ADE/backend
 npm run dev
 ```
 **URL**: http://localhost:3000
@@ -90,20 +90,20 @@ npm run build
 ## File Locations
 
 ### Pages
-- `/Users/sardag/Desktop/ADE/frontend/src/pages/AnaSayfa.tsx`
-- `/Users/sardag/Desktop/ADE/frontend/src/pages/GirisYap.tsx`
-- `/Users/sardag/Desktop/ADE/frontend/src/pages/KayitOl.tsx`
-- `/Users/sardag/Desktop/ADE/frontend/src/pages/Dashboard.tsx`
+- `/Users/lydian/Desktop/ADE/frontend/src/pages/AnaSayfa.tsx`
+- `/Users/lydian/Desktop/ADE/frontend/src/pages/GirisYap.tsx`
+- `/Users/lydian/Desktop/ADE/frontend/src/pages/KayitOl.tsx`
+- `/Users/lydian/Desktop/ADE/frontend/src/pages/Dashboard.tsx`
 
 ### Config
-- `/Users/sardag/Desktop/ADE/frontend/tsconfig.json`
-- `/Users/sardag/Desktop/ADE/frontend/package.json`
-- `/Users/sardag/Desktop/ADE/frontend/src/App.tsx`
+- `/Users/lydian/Desktop/ADE/frontend/tsconfig.json`
+- `/Users/lydian/Desktop/ADE/frontend/package.json`
+- `/Users/lydian/Desktop/ADE/frontend/src/App.tsx`
 
 ### Documentation
-- `/Users/sardag/Desktop/ADE/frontend/DESIGN_SYSTEM.md`
-- `/Users/sardag/Desktop/ADE/frontend/IMPLEMENTATION_SUMMARY.md`
-- `/Users/sardag/Desktop/ADE/frontend/QUICK_START.md` (this file)
+- `/Users/lydian/Desktop/ADE/frontend/DESIGN_SYSTEM.md`
+- `/Users/lydian/Desktop/ADE/frontend/IMPLEMENTATION_SUMMARY.md`
+- `/Users/lydian/Desktop/ADE/frontend/QUICK_START.md` (this file)
 
 ## Common Commands
 

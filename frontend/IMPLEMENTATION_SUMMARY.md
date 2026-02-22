@@ -7,7 +7,7 @@ All 4 pages have been created from scratch with ultra-modern 2026 UI/UX design.
 ## Pages Created
 
 ### 1. AnaSayfa.tsx (Landing Page) - 487 lines
-**Location**: `/Users/sardag/Desktop/ADE/frontend/src/pages/AnaSayfa.tsx`
+**Location**: `/Users/lydian/Desktop/ADE/frontend/src/pages/AnaSayfa.tsx`
 
 **Features**:
 - Hero section with animated gradient mesh background
@@ -29,7 +29,7 @@ All 4 pages have been created from scratch with ultra-modern 2026 UI/UX design.
 ---
 
 ### 2. GirisYap.tsx (Login Page) - 311 lines
-**Location**: `/Users/sardag/Desktop/ADE/frontend/src/pages/GirisYap.tsx`
+**Location**: `/Users/lydian/Desktop/ADE/frontend/src/pages/GirisYap.tsx`
 
 **Features**:
 - Centered glassmorphism card
@@ -54,7 +54,7 @@ All 4 pages have been created from scratch with ultra-modern 2026 UI/UX design.
 ---
 
 ### 3. KayitOl.tsx (Sign Up Page) - 530 lines
-**Location**: `/Users/sardag/Desktop/ADE/frontend/src/pages/KayitOl.tsx`
+**Location**: `/Users/lydian/Desktop/ADE/frontend/src/pages/KayitOl.tsx`
 
 **Features**:
 - Multi-field registration form
@@ -88,7 +88,7 @@ All 4 pages have been created from scratch with ultra-modern 2026 UI/UX design.
 ---
 
 ### 4. Dashboard.tsx (Admin Panel) - 493 lines
-**Location**: `/Users/sardag/Desktop/ADE/frontend/src/pages/Dashboard.tsx`
+**Location**: `/Users/lydian/Desktop/ADE/frontend/src/pages/Dashboard.tsx`
 
 **Features**:
 - Responsive sidebar navigation (6 menu items)
@@ -213,7 +213,7 @@ frontend/
 
 ### Development
 ```bash
-cd /Users/sardag/Desktop/ADE/frontend
+cd /Users/lydian/Desktop/ADE/frontend
 npm run dev
 # Server: http://localhost:5173
 ```

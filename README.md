@@ -1,12 +1,54 @@
+<div align="center">
+
 # ADE - Smart Government Ecosystem
 
-> Proactive Digital Government Platform with 18 Ministry Integrations
+<p><em>Proactive Digital Government Platform with 18 Ministry Integrations and Citizen-Centric Service Delivery</em></p>
 
-[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
-[![NestJS](https://img.shields.io/badge/NestJS-10.x-e0234e.svg)](https://nestjs.com/)
-[![React](https://img.shields.io/badge/React-19.x-61dafb.svg)](https://react.dev/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791.svg)](https://www.postgresql.org/)
+<p>
+  <a href="#overview"><img src="https://img.shields.io/badge/Docs-Overview-blue?style=for-the-badge" alt="Overview"></a>
+  <a href="#architecture"><img src="https://img.shields.io/badge/Docs-Architecture-purple?style=for-the-badge" alt="Architecture"></a>
+  <a href="#key-features"><img src="https://img.shields.io/badge/Docs-Features-green?style=for-the-badge" alt="Features"></a>
+  <a href="#getting-started"><img src="https://img.shields.io/badge/Docs-Setup-orange?style=for-the-badge" alt="Setup"></a>
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status">
+  <img src="https://img.shields.io/badge/License-Proprietary-red?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/NestJS-10.x-E0234E?style=flat-square&logo=nestjs&logoColor=white" alt="NestJS">
+  <img src="https://img.shields.io/badge/React-19.x-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
+  <img src="https://img.shields.io/badge/Compliance-KVKK%20%2B%20GDPR-009900?style=flat-square" alt="Compliance">
+</p>
+
+<br>
+
+<table>
+<tr>
+<td width="50%">
+
+**Platform Highlights**
+- 18 government ministry API integrations via unified gateway
+- Proactive service recommendation engine for citizens
+- Real-time data pipeline with event-driven architecture
+- KVKK and GDPR compliant data processing with full audit trails
+
+</td>
+<td width="50%">
+
+**Technical Excellence**
+- Enterprise JWT authentication with RBAC and MFA support
+- Prometheus and Grafana end-to-end observability stack
+- AES-256 encryption at rest, TLS 1.3 in transit
+- Docker and Docker Compose containerized deployment
+
+</td>
+</tr>
+</table>
+
+</div>
+
+---
 
 ## Overview
 
@@ -47,18 +89,18 @@ graph TD
 - **KVKK / GDPR Compliance** — Full data privacy compliance with audit trails
 - **Prometheus + Grafana Monitoring** — End-to-end observability across all services
 
-## Technology Stack
+## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Backend API | NestJS 10, TypeScript |
-| Frontend | React 19, TypeScript |
-| Database | PostgreSQL 15, Prisma ORM |
-| Caching | Redis 7 |
-| State Management | Zustand |
-| Data Fetching | TanStack Query |
-| Monitoring | Prometheus, Grafana |
-| Container | Docker, Docker Compose |
+| Layer | Technology | Badge |
+|:------|:-----------|:------|
+| Backend API | NestJS 10, TypeScript | ![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=flat-square&logo=nestjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white) |
+| Frontend | React 19, TypeScript | ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black) |
+| Database | PostgreSQL 15, Prisma ORM | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white) |
+| Caching | Redis 7 | ![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat-square&logo=redis&logoColor=white) |
+| State Management | Zustand | ![Zustand](https://img.shields.io/badge/Zustand-latest-orange?style=flat-square) |
+| Data Fetching | TanStack Query | ![TanStack](https://img.shields.io/badge/TanStack_Query-v5-FF4154?style=flat-square) |
+| Monitoring | Prometheus, Grafana | ![Prometheus](https://img.shields.io/badge/Prometheus-latest-E6522C?style=flat-square&logo=prometheus&logoColor=white) |
+| Container | Docker, Docker Compose | ![Docker](https://img.shields.io/badge/Docker-latest-2496ED?style=flat-square&logo=docker&logoColor=white) |
 
 ## Project Structure
 

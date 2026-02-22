@@ -89,7 +89,7 @@ Documentation:       4 dosya (650+ satır)
 
 ### Mobile (iOS)
 ```
-/Users/sardag/Desktop/ADE/mobile/ios/ADE/
+/Users/lydian/Desktop/ADE/mobile/ios/ADE/
 ├── Core/Network/
 │   └── APIClient.swift                    (11.5KB) ✅
 ├── Data/Models/
@@ -105,7 +105,7 @@ Documentation:       4 dosya (650+ satır)
 
 ### Mobile (Android)
 ```
-/Users/sardag/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/
+/Users/lydian/Desktop/ADE/mobile/android/app/src/main/java/tr/gov/ade/
 ├── core/network/
 │   └── APIClient.kt                       (10.8KB) ✅
 ├── data/model/
@@ -121,7 +121,7 @@ Documentation:       4 dosya (650+ satır)
 
 ### Backend
 ```
-/Users/sardag/Desktop/ADE/backend/
+/Users/lydian/Desktop/ADE/backend/
 ├── src/modules/
 │   ├── ecommerce/
 │   │   └── ecommerce.controller.ts        (6.5KB)  ✅
@@ -133,7 +133,7 @@ Documentation:       4 dosya (650+ satır)
 
 ### Documentation
 ```
-/Users/sardag/Desktop/ADE/
+/Users/lydian/Desktop/ADE/
 ├── ROADMAP_TO_100_PERCENT.md              (22KB)   ✅
 ├── IMPLEMENTATION_PROGRESS_REPORT.md      (8.5KB)  ✅
 ├── FULL_FEATURE_SET_SUMMARY.md            (Bu dosya) ✅
