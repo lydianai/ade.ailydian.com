@@ -171,7 +171,7 @@ NOTLAR
 
 YEDEKLEME BİLGİSİ
 =================
-Konum: /Users/sardag/Desktop/ADE/frontend/
+Konum: /home/lydian/Masaüstü/PROJELER/ADE/frontend/
 Tüm dosyalar bu dizinde güncel halde
 Git deposu yok (dosya sistemi üzerinde)
 
