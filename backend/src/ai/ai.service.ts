@@ -145,7 +145,7 @@ Yasal uyarı: Verdiğin bilgiler rehberlik amaçlıdır, resmi hukuki danışman
         }
       }
 
-      // Call Claude 4
+      // Call AI Engine
       const response = await this.anthropic.messages.create({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 2048,
@@ -180,7 +180,7 @@ Yasal uyarı: Verdiğin bilgiler rehberlik amaçlıdır, resmi hukuki danışman
 
   /**
    * Voice-to-Voice Chat with Personaplex-7B
-   * Pipeline: Whisper (STT) → Claude/Personaplex → TTS
+   * Pipeline: Speech-to-Text → AI Engine → TTS
    */
   async voiceChat(
     userId: string,
@@ -201,7 +201,7 @@ Yasal uyarı: Verdiğin bilgiler rehberlik amaçlıdır, resmi hukuki danışman
 
       this.logger.log(`🗣️  Transcribed: "${transcription}"`);
 
-      // Step 2: Generate text response with Claude
+      // Step 2: Generate text response with AI
       const textResponse = await this.chat(userId, {
         message: transcription,
         history: dto.history,
@@ -420,14 +420,14 @@ Yasal uyarı: Verdiğin bilgiler rehberlik amaçlıdır, resmi hukuki danışman
    * Health check for AI services
    */
   async healthCheck(): Promise<{
-    claude: boolean;
+    aiEngine: boolean;
     personaplex: boolean;
     whisper: boolean;
   }> {
     return {
-      claude: !!this.anthropic,
+      aiEngine: !!this.anthropic,
       personaplex: !!this.hf,
-      whisper: !!this.openai,
+      speechToText: !!this.openai,
     };
   }
 }

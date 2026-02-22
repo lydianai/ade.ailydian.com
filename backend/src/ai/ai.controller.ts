@@ -150,7 +150,7 @@ export class AiController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'AI services health check',
-    description: 'Check if Claude, Personaplex, and Whisper services are available',
+    description: 'Check if AI services are available',
   })
   @ApiResponse({
     status: 200,
@@ -158,7 +158,7 @@ export class AiController {
     schema: {
       type: 'object',
       properties: {
-        claude: { type: 'boolean' },
+        aiEngine: { type: 'boolean' },
         personaplex: { type: 'boolean' },
         whisper: { type: 'boolean' },
       },

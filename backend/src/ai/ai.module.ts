@@ -7,7 +7,7 @@ import { AiService } from './ai.service';
 
 /**
  * AI Module
- * Provides AI assistant capabilities with Claude 4 and NVIDIA Personaplex-7B
+ * Provides AI assistant capabilities with intelligent analysis engine
  * Voice Assistant with STT (Whisper) + TTS (OpenAI) + Personalized Responses
  */
 @Module({
