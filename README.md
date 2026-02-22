@@ -2,227 +2,226 @@
 
 # ADE - Smart Government Ecosystem
 
-<p><em>Proactive Digital Government Platform with 18 Ministry Integrations and Citizen-Centric Service Delivery</em></p>
+### Intelligent E-Government Platform with 18 Ministry Integrations and Proactive Citizen Services
+### 18 Bakanlik Entegrasyonlu ve Proaktif Vatandas Hizmetleri Sunan Akilli E-Devlet Platformu
 
-<p>
-  <a href="#overview"><img src="https://img.shields.io/badge/Docs-Overview-blue?style=for-the-badge" alt="Overview"></a>
-  <a href="#architecture"><img src="https://img.shields.io/badge/Docs-Architecture-purple?style=for-the-badge" alt="Architecture"></a>
-  <a href="#key-features"><img src="https://img.shields.io/badge/Docs-Features-green?style=for-the-badge" alt="Features"></a>
-  <a href="#getting-started"><img src="https://img.shields.io/badge/Docs-Setup-orange?style=for-the-badge" alt="Setup"></a>
-</p>
-
-<p>
-  <img src="https://img.shields.io/badge/Status-Active-success?style=flat-square" alt="Status">
-  <img src="https://img.shields.io/badge/License-Proprietary-red?style=flat-square" alt="License">
-  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/NestJS-10.x-E0234E?style=flat-square&logo=nestjs&logoColor=white" alt="NestJS">
-  <img src="https://img.shields.io/badge/React-19.x-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
-  <img src="https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white" alt="PostgreSQL">
-  <img src="https://img.shields.io/badge/Compliance-KVKK%20%2B%20GDPR-009900?style=flat-square" alt="Compliance">
-</p>
-
-<br>
-
-<table>
-<tr>
-<td width="50%">
-
-**Platform Highlights**
-- 18 government ministry API integrations via unified gateway
-- Proactive service recommendation engine for citizens
-- Real-time data pipeline with event-driven architecture
-- KVKK and GDPR compliant data processing with full audit trails
-
-</td>
-<td width="50%">
-
-**Technical Excellence**
-- Enterprise JWT authentication with RBAC and MFA support
-- Prometheus and Grafana end-to-end observability stack
-- AES-256 encryption at rest, TLS 1.3 in transit
-- Docker and Docker Compose containerized deployment
-
-</td>
-</tr>
-</table>
+[![Live Demo](https://img.shields.io/badge/Live-Demo-00ff00?style=for-the-badge)](https://ade.ailydian.com)
+[![License](https://img.shields.io/badge/License-Proprietary-blue?style=for-the-badge)]()
+[![Status](https://img.shields.io/badge/Status-Production-brightgreen?style=for-the-badge)]()
+[![KVKK](https://img.shields.io/badge/KVKK-Compliant-009900?style=for-the-badge)]()
+[![GDPR](https://img.shields.io/badge/GDPR-Compliant-009900?style=for-the-badge)]()
 
 </div>
 
 ---
 
-## Overview
+## Preview
 
-ADE (Smart Government Ecosystem) is an enterprise-grade digital government platform that unifies 18 ministry APIs into a single citizen-facing portal. It provides proactive service recommendations, real-time government data processing, and KVKK/GDPR-compliant data handling — all under one secure, monitored infrastructure.
+<div align="center">
+  <img src="docs/screenshots/ade-egovernment-landing.png" alt="ADE - A Government Advisor in Every Citizen's Pocket" width="800">
+  <br><em>ADE Landing - "A Government Advisor in Every Citizen's Pocket" | 18 Ministry Integrations | 7/24 Availability | 80% Automation | 99.95% Uptime</em>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="docs/screenshots/ade-dashboard.png" alt="ADE Dashboard - Revenue, Invoices, Customers, Payments" width="800">
+  <br><em>Citizen Dashboard - Total Revenue, Pending Invoices, Active Customers, Monthly Payments with Recent Transaction History</em>
+</div>
+
+---
+
+## Executive Summary
+
+ADE (Smart Government Ecosystem) is an enterprise-grade digital government platform that unifies 18 Turkish ministry APIs into a single citizen-facing portal with a proprietary proactive recommendation engine. Rather than forcing citizens to navigate complex bureaucratic structures, ADE intelligently surfaces relevant government services, automates tax filings, manages SGK (social security) premiums, and handles utility payments -- all from a single dashboard.
+
+The platform targets the $18B global e-government market with a B2G (business-to-government) subscription model for municipalities, government agencies, and citizen service centers. With Turkey's 85 million citizens and the government's aggressive digitization agenda, ADE addresses a massive underserved market. The platform achieves 80% process automation, reducing citizen wait times from days to minutes and cutting municipal operational costs by up to 60%.
+
+ADE's technical architecture features a NestJS 10 backend with 18 ministry integration adapters, a React 19 citizen portal with real-time data processing, event-driven architecture for live government data synchronization, and full KVKK/GDPR compliance with audit trails. The Prometheus + Grafana observability stack ensures 99.95% uptime for mission-critical government services.
+
+## Yonetici Ozeti
+
+ADE (Akilli Devlet Ekosistemi), 18 Turk bakanlik API'sini tescilli proaktif oneri motoruyla tek bir vatandas portalinda birlestiren kurumsal sinif bir dijital devlet platformudur. Vatandaslari karmasik burokratik yapilarda gezmeye zorlamak yerine, ADE ilgili devlet hizmetlerini akillica one cikarir, vergi beyannamelerini otomatiklestirir, SGK primlerini yonetir ve fatura odemelerini tek bir panodan gerceklestirir.
+
+Platform, belediyeler, devlet kurumlari ve vatandas hizmet merkezleri icin B2G (devlete satis) abonelik modeliyle 18 milyar dolarlik kuresel e-devlet pazarini hedeflemektedir. Turkiye'nin 85 milyon vatandasi ve hukumetin agresif dijitallestirme gundemiyle ADE, buyuk ve yetersiz hizmet alan bir pazara hitap etmektedir. Platform %80 surec otomasyonu saglamakta, vatandas bekleme surelerini gunlerden dakikalara indirmekte ve belediye operasyonel maliyetlerini %60'a kadar dusurmektedir.
+
+ADE'nin teknik mimarisi; 18 bakanlik entegrasyon adaptorune sahip NestJS 10 arka ucu, gercek zamanli veri isleme ile React 19 vatandas portali, canli devlet veri senkronizasyonu icin olay guden mimari ve denetim izleriyle tam KVKK/GDPR uyumlulugu icermektedir.
+
+---
+
+## Key Metrics
+
+| Metric | Value |
+|--------|-------|
+| Ministry Integrations | 18 |
+| Service Availability | 7/24 |
+| Process Automation | 80% |
+| System Uptime | 99.95% |
+| Total Revenue Tracked | 125,430+ TRY (demo) |
+| Active Customers | 156+ (demo) |
+| Dashboard Modules | 10 (Invoice, Accounting, Payments, Reports, etc.) |
+
+---
+
+## Revenue Model & Projections
+
+### Business Model
+
+B2G municipal and agency subscriptions:
+- **Small Municipality** (pop. <50K): $2,000/month - Core citizen services portal
+- **Medium Municipality** (pop. 50K-500K): $10,000/month - Full 18-ministry integration + analytics
+- **Large Municipality** (pop. 500K+): $25,000/month - Enterprise features + custom integrations
+- **Government Agency**: $50,000/month - Multi-region deployment + priority support
+- **Add-on Revenue**: Implementation services ($100K-500K), training, custom ministry adapters
+
+### 5-Year Revenue Forecast
+
+| Year | Municipalities | Agencies | ARR | Growth |
+|------|---------------|----------|-----|--------|
+| Y1 | 8 | 2 | $120K | - |
+| Y2 | 25 | 8 | $480K | 300% |
+| Y3 | 50 | 15 | $1.2M | 150% |
+| Y4 | 100 | 30 | $3.5M | 192% |
+| Y5 | 200 | 60 | $8M | 129% |
+
+---
+
+## Market Opportunity
+
+| Segment | Value |
+|---------|-------|
+| **TAM** (Global E-Government) | $18B |
+| **SAM** (Turkey + MENA Govtech) | $2.5B |
+| **SOM** (Addressable in 5 years) | $300M |
+
+Key growth drivers:
+- Turkey's Digital Transformation Office mandating e-government adoption
+- 1,389 municipalities in Turkey, majority still using legacy systems
+- MENA region governments investing $50B+ in smart city initiatives
+- EU-funded digital governance programs for Turkey's EU accession process
+- Post-pandemic citizen expectation for digital-first government services
+
+---
+
+## Tech Stack
+
+![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=for-the-badge&logo=nestjs&logoColor=white)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![Prometheus](https://img.shields.io/badge/Prometheus-Monitoring-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-Dashboards-F46800?style=for-the-badge&logo=grafana&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+| Layer | Technology |
+|:------|:-----------|
+| Backend API | NestJS 10, TypeScript 5 |
+| Frontend | React 19, TypeScript 5 |
+| State Management | Zustand |
+| Data Fetching | TanStack Query v5 |
+| Intelligence Engine | Proprietary Recommendation Engine |
+| Database | PostgreSQL 15 + Prisma ORM |
+| Cache | Redis 7 |
+| Monitoring | Prometheus + Grafana |
+| Container | Docker, Docker Compose |
+| Security | AES-256, TLS 1.3, JWT + RBAC + MFA |
+
+---
+
+## Competitive Advantages
+
+- **18-Ministry Unified Gateway**: Only platform integrating all Turkish ministry APIs through a single adapter pattern - competitors handle 3-5 at best
+- **Proactive Service Delivery**: Proprietary recommendation engine surfaces relevant services before citizens search - a paradigm shift from reactive e-government
+- **80% Automation Rate**: Tax, SGK, and utility payment automation drastically reduces municipal staffing costs
+- **Full Observability**: Prometheus + Grafana stack provides real-time SLA monitoring critical for government contracts
+- **KVKK + GDPR Native**: Built-in compliance eliminates the legal risk barrier for government procurement
+
+---
 
 ## Architecture
 
 ```mermaid
 graph TD
     subgraph "Citizen Portal"
-        A[Web App] --> B[API Gateway]
+        A[React 19 Web App] --> B[API Gateway]
     end
     subgraph "Core Services"
-        B --> C[Auth Service]
+        B --> C[Auth Service - JWT/RBAC/MFA]
         B --> D[Recommendation Engine]
         B --> E[Document Service]
+        B --> F[Invoice & Payment Service]
     end
-    subgraph "Ministry Integrations"
-        B --> F[Health Ministry]
-        B --> G[Education Ministry]
-        B --> H[Finance Ministry]
-        B --> I[Justice Ministry]
-        B --> J[... 14 More]
+    subgraph "18 Ministry Integrations"
+        B --> G[Health Ministry]
+        B --> H[Education Ministry]
+        B --> I[Finance Ministry]
+        B --> J[Justice Ministry]
+        B --> K[... 14 More Ministries]
     end
     subgraph "Infrastructure"
-        K[PostgreSQL] --> B
-        L[Redis Cache] --> B
-        M[Monitoring] --> B
+        L[PostgreSQL 15] --> B
+        M[Redis 7] --> B
+        N[Prometheus] --> O[Grafana]
     end
 ```
 
-## Key Features
-
-- **18 Ministry API Integrations** — Unified gateway to Health, Education, Finance, Justice, and 14 additional ministries
-- **Proactive Recommendation Engine** — Surfaces relevant government services to citizens before they need to search
-- **Real-Time Data Pipeline** — Live government data synchronization with event-driven processing
-- **Enterprise JWT Authentication** — Role-based access control (RBAC) with multi-factor support
-- **KVKK / GDPR Compliance** — Full data privacy compliance with audit trails
-- **Prometheus + Grafana Monitoring** — End-to-end observability across all services
-
-## Tech Stack
-
-| Layer | Technology | Badge |
-|:------|:-----------|:------|
-| Backend API | NestJS 10, TypeScript | ![NestJS](https://img.shields.io/badge/NestJS-10-E0234E?style=flat-square&logo=nestjs&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white) |
-| Frontend | React 19, TypeScript | ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black) |
-| Database | PostgreSQL 15, Prisma ORM | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-4169E1?style=flat-square&logo=postgresql&logoColor=white) |
-| Caching | Redis 7 | ![Redis](https://img.shields.io/badge/Redis-7-DC382D?style=flat-square&logo=redis&logoColor=white) |
-| State Management | Zustand | ![Zustand](https://img.shields.io/badge/Zustand-latest-orange?style=flat-square) |
-| Data Fetching | TanStack Query | ![TanStack](https://img.shields.io/badge/TanStack_Query-v5-FF4154?style=flat-square) |
-| Monitoring | Prometheus, Grafana | ![Prometheus](https://img.shields.io/badge/Prometheus-latest-E6522C?style=flat-square&logo=prometheus&logoColor=white) |
-| Container | Docker, Docker Compose | ![Docker](https://img.shields.io/badge/Docker-latest-2496ED?style=flat-square&logo=docker&logoColor=white) |
-
-## Project Structure
-
-```
-ade.ailydian.com/
-├── backend/              # NestJS API server
-│   ├── src/
-│   │   ├── auth/         # JWT + RBAC authentication
-│   │   ├── ministries/   # 18 ministry integration modules
-│   │   ├── recommendations/ # Proactive service engine
-│   │   ├── documents/    # Document management service
-│   │   └── prisma/       # Database layer
-├── frontend/             # React 19 citizen portal
-│   ├── src/
-│   │   ├── components/   # UI component library
-│   │   ├── pages/        # Application routes
-│   │   └── stores/       # Zustand state management
-├── infrastructure/       # IaC and deployment configs
-│   ├── prometheus/       # Metrics collection
-│   └── grafana/          # Dashboard definitions
-└── docker-compose.yml    # Local development stack
-```
+---
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 20+
-- pnpm 8+
-- PostgreSQL 15
-- Redis 7
-- Docker (optional)
-
-### Installation
-
 ```bash
 # Clone the repository
-git clone https://github.com/lydianai/ade.ailydian.com.git
+git clone https://github.com/AiLydian/ade.ailydian.com.git
 cd ade.ailydian.com
 
 # Install dependencies
 pnpm install
 
-# Configure environment variables
+# Configure environment
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 
 # Run database migrations
 pnpm --filter backend prisma migrate dev
 
-# Start development servers
+# Start development
 pnpm dev
-```
 
-### Docker Quick Start
-
-```bash
+# Or use Docker
 docker compose up -d
 ```
 
-The citizen portal will be available at `http://localhost:3000` and the API at `http://localhost:4000`.
-
-## Environment Variables
-
-### Backend
-
-| Variable | Description | Required |
-|---|---|---|
-| `DATABASE_URL` | PostgreSQL connection string | Yes |
-| `REDIS_URL` | Redis connection string | Yes |
-| `JWT_SECRET` | JWT signing secret (min 64 chars) | Yes |
-| `JWT_REFRESH_SECRET` | Refresh token signing secret | Yes |
-| `MINISTRY_API_BASE_URL` | Base URL for ministry APIs | Yes |
-| `MINISTRY_API_KEY` | Ministry integration API key | Yes |
-| `KVKK_COMPLIANCE_MODE` | Enable KVKK data controls | Yes |
-
-### Frontend
-
-| Variable | Description | Required |
-|---|---|---|
-| `NEXT_PUBLIC_API_URL` | Backend API endpoint | Yes |
-| `NEXT_PUBLIC_WS_URL` | WebSocket server URL | Yes |
-
-## Ministry Integrations
-
-The platform integrates with 18 government ministry APIs through a unified adapter pattern:
-
-1. Ministry of Health (Saglik Bakanligi)
-2. Ministry of National Education (Milli Egitim)
-3. Ministry of Treasury and Finance (Hazine ve Maliye)
-4. Ministry of Justice (Adalet)
-5. Ministry of Interior (Icisleri)
-6. Ministry of Foreign Affairs (Disisleri)
-7. Ministry of Environment (Cevre)
-8. Ministry of Agriculture (Tarim)
-9. Ministry of Industry and Technology (Sanayi ve Teknoloji)
-10. Ministry of Energy (Enerji)
-11. Ministry of Transport (Ulastirma)
-12. Ministry of Trade (Ticaret)
-13. Ministry of Culture and Tourism (Kultur ve Turizm)
-14. Ministry of Labour (Calisma)
-15. Ministry of Family (Aile)
-16. Ministry of Youth and Sports (Genclik ve Spor)
-17. Ministry of Defense (Milli Savunma)
-18. Higher Education Council (YOK)
-
-## Security
-
-See [SECURITY.md](SECURITY.md) for the vulnerability reporting policy.
-
-- All API endpoints protected with JWT + RBAC
-- KVKK and GDPR compliant data processing
-- AES-256 encryption at rest, TLS 1.3 in transit
-- Regular automated dependency vulnerability scanning
-- OWASP Top 10 mitigations applied
-
-## License
-
-Copyright (c) 2024-2026 Lydian (AiLydian). All Rights Reserved.
-
-This is proprietary software. See [LICENSE](LICENSE) for full terms.
+Citizen portal: `http://localhost:3000` | API: `http://localhost:4000`
 
 ---
 
-Built by [AiLydian](https://www.ailydian.com)
+## Security & Compliance
+
+| Standard | Coverage |
+|----------|----------|
+| **KVKK** | Full Turkish data protection compliance - VERBIS registration, consent management |
+| **GDPR** | EU data protection standards for international operations |
+| **Authentication** | JWT + RBAC + Multi-Factor Authentication (MFA) |
+| **Encryption** | AES-256 at rest, TLS 1.3 in transit |
+| **Audit Trail** | Complete logging for all citizen data access |
+| **Monitoring** | Prometheus + Grafana real-time observability |
+| **OWASP** | Top 10 mitigations applied across all endpoints |
+
+---
+
+## Contact
+
+| | |
+|---|---|
+| Email | info@ailydian.com |
+| Email | ailydian@ailydian.com |
+| Web | https://ailydian.com |
+| Demo | https://ade.ailydian.com |
+
+---
+
+## License
+
+Copyright (c) 2025-2026 AiLydian. All Rights Reserved.
+This software is proprietary and confidential. Unauthorized copying, distribution, or modification is strictly prohibited.
