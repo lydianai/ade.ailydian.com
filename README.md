@@ -1,171 +1,186 @@
-# 🇹🇷 ADE - Akıllı Devlet Ekosistemi
+# ADE - Smart Government Ecosystem
 
-> **Türkiye'nin İlk AI-Powered Devlet Asistanı**
-> Proaktif, hukuken geçerli işlemler yapabilen, 18 bakanlık entegrasyonlu dijital devlet platformu
+> Proactive Digital Government Platform with 18 Ministry Integrations
 
-## 📋 Proje Bilgileri
+[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-10.x-e0234e.svg)](https://nestjs.com/)
+[![React](https://img.shields.io/badge/React-19.x-61dafb.svg)](https://react.dev/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-336791.svg)](https://www.postgresql.org/)
 
-- **Versiyon:** 1.0.0-alpha
-- **Başlangıç:** Ocak 2025
-- **Durum:** Development (MVP)
-- **Hedef:** Production Q2 2025
+## Overview
 
-## 🏗️ Mimari
+ADE (Smart Government Ecosystem) is an enterprise-grade digital government platform that unifies 18 ministry APIs into a single citizen-facing portal. It provides proactive service recommendations, real-time government data processing, and KVKK/GDPR-compliant data handling — all under one secure, monitored infrastructure.
+
+## Architecture
+
+```mermaid
+graph TD
+    subgraph "Citizen Portal"
+        A[Web App] --> B[API Gateway]
+    end
+    subgraph "Core Services"
+        B --> C[Auth Service]
+        B --> D[Recommendation Engine]
+        B --> E[Document Service]
+    end
+    subgraph "Ministry Integrations"
+        B --> F[Health Ministry]
+        B --> G[Education Ministry]
+        B --> H[Finance Ministry]
+        B --> I[Justice Ministry]
+        B --> J[... 14 More]
+    end
+    subgraph "Infrastructure"
+        K[PostgreSQL] --> B
+        L[Redis Cache] --> B
+        M[Monitoring] --> B
+    end
+```
+
+## Key Features
+
+- **18 Ministry API Integrations** — Unified gateway to Health, Education, Finance, Justice, and 14 additional ministries
+- **Proactive Recommendation Engine** — Surfaces relevant government services to citizens before they need to search
+- **Real-Time Data Pipeline** — Live government data synchronization with event-driven processing
+- **Enterprise JWT Authentication** — Role-based access control (RBAC) with multi-factor support
+- **KVKK / GDPR Compliance** — Full data privacy compliance with audit trails
+- **Prometheus + Grafana Monitoring** — End-to-end observability across all services
+
+## Technology Stack
+
+| Layer | Technology |
+|---|---|
+| Backend API | NestJS 10, TypeScript |
+| Frontend | React 19, TypeScript |
+| Database | PostgreSQL 15, Prisma ORM |
+| Caching | Redis 7 |
+| State Management | Zustand |
+| Data Fetching | TanStack Query |
+| Monitoring | Prometheus, Grafana |
+| Container | Docker, Docker Compose |
+
+## Project Structure
 
 ```
-ADE/
-├── backend/          # NestJS API (Port: 3000)
-├── frontend/         # Vite + React (Port: 5173)
-├── mobile/           # React Native + Expo (gelecek)
-├── shared/           # Ortak tip ve utilityler
-├── infrastructure/   # Terraform, Docker, CI/CD
-└── docs/            # Teknik dokümantasyon
+ade.ailydian.com/
+├── backend/              # NestJS API server
+│   ├── src/
+│   │   ├── auth/         # JWT + RBAC authentication
+│   │   ├── ministries/   # 18 ministry integration modules
+│   │   ├── recommendations/ # Proactive service engine
+│   │   ├── documents/    # Document management service
+│   │   └── prisma/       # Database layer
+├── frontend/             # React 19 citizen portal
+│   ├── src/
+│   │   ├── components/   # UI component library
+│   │   ├── pages/        # Application routes
+│   │   └── stores/       # Zustand state management
+├── infrastructure/       # IaC and deployment configs
+│   ├── prometheus/       # Metrics collection
+│   └── grafana/          # Dashboard definitions
+└── docker-compose.yml    # Local development stack
 ```
 
-## 🚀 Teknoloji Stack
+## Getting Started
 
-### Backend
-- **Framework:** NestJS 10.x (TypeScript)
-- **Database:** PostgreSQL 15 + Prisma ORM
-- **Cache:** Redis 7
-- **Auth:** JWT (access + refresh tokens)
-- **Validation:** class-validator + class-transformer
-- **API Docs:** Swagger/OpenAPI 3.0
+### Prerequisites
 
-### Frontend
-- **Build Tool:** Vite 5.x
-- **Framework:** React 19 + TypeScript
-- **Routing:** React Router v6
-- **State:** Zustand + TanStack Query v5
-- **UI:** Tailwind CSS 4 + shadcn/ui
-- **Forms:** React Hook Form + Zod
-- **Charts:** Recharts
+- Node.js 20+
+- pnpm 8+
+- PostgreSQL 15
+- Redis 7
+- Docker (optional)
 
-### DevOps
-- **Container:** Docker + Docker Compose
-- **Cloud:** AWS (Frankfurt region - KVKK compliant)
-- **CI/CD:** GitHub Actions
-- **IaC:** Terraform
-- **Monitoring:** Prometheus + Grafana
-
-## 📦 Hızlı Başlangıç
-
-### Gereksinimler
-- Node.js 20.x LTS
-- pnpm 8.x
-- Docker Desktop
-- PostgreSQL 15 (veya Docker ile)
-- Redis 7 (veya Docker ile)
-
-### Kurulum
+### Installation
 
 ```bash
-# 1. Repoyu klonla
-cd ~/Desktop/ADE
+# Clone the repository
+git clone https://github.com/lydianai/ade.ailydian.com.git
+cd ade.ailydian.com
 
-# 2. Bağımlılıkları yükle
+# Install dependencies
 pnpm install
 
-# 3. Environment variables kopyala
+# Configure environment variables
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
 
-# 4. Docker servisleri başlat (PostgreSQL + Redis)
-docker-compose up -d
+# Run database migrations
+pnpm --filter backend prisma migrate dev
 
-# 5. Database migration
-cd backend && pnpm prisma migrate dev
-
-# 6. Backend başlat
-pnpm dev:backend
-
-# 7. Frontend başlat (yeni terminal)
-pnpm dev:frontend
+# Start development servers
+pnpm dev
 ```
 
-### Erişim
-- **Frontend:** http://localhost:5173
-- **Backend API:** http://localhost:3000
-- **API Docs:** http://localhost:3000/api/docs
-- **PostgreSQL:** localhost:5432
-- **Redis:** localhost:6379
+### Docker Quick Start
 
-## 📐 Kod Standartları
-
-### Commit Konvansiyonları
-```
-feat: Yeni özellik
-fix: Hata düzeltme
-docs: Dokümantasyon
-style: Kod formatı (logic değişmez)
-refactor: Kod iyileştirme
-test: Test ekleme/düzeltme
-chore: Build, config değişiklikleri
+```bash
+docker compose up -d
 ```
 
-### Branch Stratejisi
-- `main` - Production-ready kod
-- `develop` - Development branch
-- `feature/*` - Yeni özellikler
-- `bugfix/*` - Hata düzeltmeleri
-- `hotfix/*` - Acil production düzeltmeleri
+The citizen portal will be available at `http://localhost:3000` and the API at `http://localhost:4000`.
 
-## 🔐 Güvenlik
+## Environment Variables
 
-- ✅ OWASP Top 10 2025 compliant
-- ✅ KVKK (6698 Sayılı Kanun) uyumlu
-- ✅ JWT authentication (RS256)
-- ✅ Rate limiting (100 req/min)
-- ✅ Input validation (Zod + class-validator)
-- ✅ SQL injection koruması (Prisma ORM)
-- ✅ XSS koruması (CSP headers)
-- ✅ CSRF tokens
-- ✅ Helmet.js security headers
+### Backend
 
-## 📊 Proje Yol Haritası
+| Variable | Description | Required |
+|---|---|---|
+| `DATABASE_URL` | PostgreSQL connection string | Yes |
+| `REDIS_URL` | Redis connection string | Yes |
+| `JWT_SECRET` | JWT signing secret (min 64 chars) | Yes |
+| `JWT_REFRESH_SECRET` | Refresh token signing secret | Yes |
+| `MINISTRY_API_BASE_URL` | Base URL for ministry APIs | Yes |
+| `MINISTRY_API_KEY` | Ministry integration API key | Yes |
+| `KVKK_COMPLIANCE_MODE` | Enable KVKK data controls | Yes |
 
-### Faz 1: MVP (Ay 1-6) - ŞU AN BURDAYIZ
-- [x] Proje setup
-- [ ] Auth sistemi (login/register)
-- [ ] e-Fatura kesme (basit)
-- [ ] Dashboard (ana sayfa)
-- [ ] Beta launch (50 kullanıcı)
+### Frontend
 
-### Faz 2: Core Features (Ay 7-12)
-- [ ] GİB entegrasyonu (gerçek)
-- [ ] SGK entegrasyonu
-- [ ] Muhasebe modülü
-- [ ] Public launch (10K kullanıcı)
+| Variable | Description | Required |
+|---|---|---|
+| `NEXT_PUBLIC_API_URL` | Backend API endpoint | Yes |
+| `NEXT_PUBLIC_WS_URL` | WebSocket server URL | Yes |
 
-### Faz 3: Scale (Ay 13-18)
-- [ ] AI chatbot (Claude fine-tuned)
-- [ ] 18 bakanlık entegrasyonu
-- [ ] Mobile app (React Native)
-- [ ] 100K kullanıcı
+## Ministry Integrations
 
-### Faz 4: Dominasyon (Ay 19-24)
-- [ ] Sesli asistan (Alexa/Google Home)
-- [ ] Predictive analytics
-- [ ] Series A funding
-- [ ] Market leader
+The platform integrates with 18 government ministry APIs through a unified adapter pattern:
 
-## 👥 Ekip
+1. Ministry of Health (Saglik Bakanligi)
+2. Ministry of National Education (Milli Egitim)
+3. Ministry of Treasury and Finance (Hazine ve Maliye)
+4. Ministry of Justice (Adalet)
+5. Ministry of Interior (Icisleri)
+6. Ministry of Foreign Affairs (Disisleri)
+7. Ministry of Environment (Cevre)
+8. Ministry of Agriculture (Tarim)
+9. Ministry of Industry and Technology (Sanayi ve Teknoloji)
+10. Ministry of Energy (Enerji)
+11. Ministry of Transport (Ulastirma)
+12. Ministry of Trade (Ticaret)
+13. Ministry of Culture and Tourism (Kultur ve Turizm)
+14. Ministry of Labour (Calisma)
+15. Ministry of Family (Aile)
+16. Ministry of Youth and Sports (Genclik ve Spor)
+17. Ministry of Defense (Milli Savunma)
+18. Higher Education Council (YOK)
 
-- **Founder/CTO:** [İsim]
-- **Backend Lead:** [İsim]
-- **Frontend Lead:** [İsim]
-- **DevOps Engineer:** [İsim]
+## Security
 
-## 📞 İletişim
+See [SECURITY.md](SECURITY.md) for the vulnerability reporting policy.
 
-- **Website:** https://ade.com.tr (yakında)
-- **Email:** hello@ade.com.tr
-- **GitHub:** https://github.com/ade-ecosystem
+- All API endpoints protected with JWT + RBAC
+- KVKK and GDPR compliant data processing
+- AES-256 encryption at rest, TLS 1.3 in transit
+- Regular automated dependency vulnerability scanning
+- OWASP Top 10 mitigations applied
 
-## 📄 Lisans
+## License
 
-Proprietary - Tüm hakları saklıdır © 2025 ADE Teknoloji A.Ş.
+Copyright (c) 2024-2026 Lydian (AiLydian). All Rights Reserved.
+
+This is proprietary software. See [LICENSE](LICENSE) for full terms.
 
 ---
 
-**⚠️ ÖNEMLİ:** Bu proje gerçek bir production sistemidir. Güvenlik ve kalite standartları en üst seviyededir.
+Built by [AiLydian](https://www.ailydian.com)
